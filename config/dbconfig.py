@@ -1,7 +1,7 @@
 #Databse configuration information
 
-pg_config = {
-    'user' : '',
-    'passwd' : '',
-    'dbname' : ''
-}
+# pg_config = {
+#     'user' : '',
+#     'passwd' : '',
+#     'dbname' : ''
+# }

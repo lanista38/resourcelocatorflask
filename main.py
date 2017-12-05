@@ -12,12 +12,15 @@ def greeting():
     return 'Welcome to Disaster Relief Web-App!'
 
 @app.route('/registerAdmin')
+def registerAdmin():
     return RegistrationHandler().registerAdmin()
 
 @app.route('/registerSupplier')
+def registerSupplier():
     return RegistrationHandler().registerSupplier()
 
 @app.route('/registerRequester')
+def registerRequester():
     return RegistrationHandler().registerRequester()
 
 @app.route('/ResourceRequest/Resource/<string:Rname>')
@@ -34,7 +37,7 @@ def getAllAnnouncements():
 
 @app.route('/BrowseRequests/')
 def getAllRequests():
-    return R equestHandler().getAllRequests()
+    return RequestHandler().getAllRequests()
 
 @app.route('/SearchRequests/Resource/<string:Rname>')
 def getAllRequests():
