@@ -40,5 +40,10 @@ def getSupplierById(sid):
 def getPartsBySuplierId(sid):
     return SupplierHandler().getPartsBySupplierId(sid)
 
+@app.route('/PartApp/requests')
+def getAllRequests():
+    return 0
+
+
 if __name__ == '__main__':
     app.run()
