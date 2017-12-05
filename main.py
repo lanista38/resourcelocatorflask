@@ -27,6 +27,23 @@ def getAllRequests():
 def getAllAnnouncements():
     return AnnouncementHandler().AnnounceResource(Rname)
 
+@app.route('/BrowseAnnouncements/')
+def getAllAnnouncements():
+    return AnnouncementHandler().getAllAnnouncements()
+
+@app.route('/BrowseRequests/')
+def getAllRequests():
+    return RequestHandler().getAllRequests()
+
+@app.route('/SearchRequests/Resource/<string:Rname>')
+def getAllRequests():
+    return RequestHandler().getRequestByResource(Rname)
+
+@app.route('/SearchAnnounce/Resource/<string:Rname>')
+def getAllAnnouncements():
+    return AnnouncementHandler().getAnnouncementByResource(Rname)
+
+
 
 #Hasta aqui son nuestras rutas por ahora
 

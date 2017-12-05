@@ -12,3 +12,6 @@ class AnnouncementHandler:
 
     def AnnounceResource(self,Rname):
         return 0
+
+    def getAnnouncementByResource(self,Rname):
+        return 0
