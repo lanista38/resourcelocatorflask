@@ -10,20 +10,6 @@ app = Flask(__name__)
 def greeting():
     return 'Hello, this is the parts DB App!'
 
-@app.route('/PartApp/parts')
-def getAllParts():
-    if not request.args:
-        return PartHandler().getAllParts()
-    else:
-        return PartHandler().searchParts(request.args)
-
-@app.route('/PartApp/parts/<int:pid>')
-def getPartById(pid):
-    return PartHandler().getPartById(pid)
-
-@app.route('/PartApp/parts/<int:pid>/suppliers')
-def getSuppliersByPartId(pid):
-    return PartHandler().getSuppliersByPartId(pid)
 
 @app.route('/PartApp/suppliers')
 def getAllSuppliers():
@@ -36,13 +22,34 @@ def getAllSuppliers():
 def getSupplierById(sid):
     return SupplierHandler().getSupplierById(sid)
 
-@app.route('/PartApp/suppliers/<int:sid>/parts')
-def getPartsBySuplierId(sid):
-    return SupplierHandler().getPartsBySupplierId(sid)
 
+# Resource Requests routes
 @app.route('/PartApp/requests')
 def getAllRequests():
-    return 0
+    return RequestHandler().getAllRequests()
+
+@app.route('/PartApp/requests/<int:Rid>')
+def getRequestById(Rid):
+    return RequestHandler().getRequestByRid(Rid)
+
+@app.route('/PartApp/requests/<int:RPid>')
+def getRequestByRPId(RPid):
+    return RequestHandler().getRequestByRPId(RPid)
+
+
+#Reserve/Purchase routes
+
+@app.route('/PartApp/purchases')
+def getAllPurchases():
+    return PurchaseHandler().getAllPurchases()
+
+@app.route('/PartApp/purchases/<int:Rid>')
+def getPurchaseByRid(Rid):
+    return PurchaseHandler().getPurchaseByRid(Rid)
+
+@app.route('/PartApp/purchases/<int:RPid>')
+def getPurchaseByRPid(RPid):
+    return PurchaseHandler().getPurchaseByRPid(RPid)
 
 
 if __name__ == '__main__':

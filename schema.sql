@@ -13,6 +13,7 @@ create table Supplier(Sid serial primary key, Sname varchar(10), SlastName varch
 create table Rperson(RPid serial primary key, RPname varchar(20), RPlastName varchar(20),
   RPcity varchar(20), RPgpsx double, RPgpsy double, RPaddress varchar(20), RPregion varchar(20));
 
-create table ResourceRequest(Rdate varchar(10));
+create table ResourceRequest(Rid integer references Resource(Rid), RPid integer references Rperson(RPid),
+  Rdate varchar(10), primary key(Rid, RPid));
 
 create table Purchase(Pdate varchar(10));
