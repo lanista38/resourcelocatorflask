@@ -1,7 +1,8 @@
 from flask import Flask, jsonify, request
-from handler.parts import PartHandler
-from handler.supplier import SupplierHandler
-
+from handler.registration import RegistrationHandler
+from handler.ResourceRequest import RequestHandler
+from handler.dashboard import DashboardHandler
+from handler.announcement import AnnouncementHandler
 
 
 app = Flask(__name__)
@@ -33,7 +34,7 @@ def getAllAnnouncements():
 
 @app.route('/BrowseRequests/')
 def getAllRequests():
-    return RequestHandler().getAllRequests()
+    return R equestHandler().getAllRequests()
 
 @app.route('/SearchRequests/Resource/<string:Rname>')
 def getAllRequests():
