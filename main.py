@@ -20,8 +20,13 @@ def greeting():
     return RegistrationHandler().registerRequester()
 
 @app.route('/ResourceRequest/Resource/<string:Rname>')
-def getResourceByRname(Rname):
+def getAllRequests():
     return RequestHandler().getResourceByRname(Rname)
+
+@app.route('/AnnounceResource/Resource/<string:Rname>')
+def getAllAnnouncements():
+    return AnnouncementHandler().AnnounceResource(Rname)
+
 
 #Hasta aqui son nuestras rutas por ahora
 

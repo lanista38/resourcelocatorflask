@@ -9,3 +9,6 @@ class AnnouncementHandler:
 
     def getAllAnnouncements(self):
         return result
+
+    def AnnounceResource(self,Rname):
+        return 0
