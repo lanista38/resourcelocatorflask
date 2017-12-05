@@ -4,7 +4,7 @@ class PurchaseHandler:
     #Dictionary to be revised
 
     def build_purchase_dict(self, row):
-        result{}
+        result = {}
         result['Pid'] = row[0]
         result['Purchasedate'] = row[1]
 

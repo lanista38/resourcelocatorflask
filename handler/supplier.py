@@ -1,5 +1,5 @@
 from flask import jsonify
-from dao.supplier import SupplierDAO
+#from dao.supplier import SupplierDAO
 
 
 class SupplierHandler:
@@ -68,4 +68,3 @@ class SupplierHandler:
                 return jsonify(Suppliers=result_list)
             else:
                 return jsonify(Error="Malformed search string."), 400
-
