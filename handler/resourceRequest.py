@@ -9,5 +9,5 @@ class RequestHandler:
 
     def getAllRequests(self):
         return 0
-
-    
+    def getResourceByRname(self,Rname):
+        return 0

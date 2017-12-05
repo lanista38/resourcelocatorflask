@@ -8,14 +8,32 @@ app = Flask(__name__)
 
 @app.route('/')
 def greeting():
-    return 'Hello, this is the parts DB App!'
+    return 'Welcome to Disaster Relief Web-App!'
 
-@app.route('/PartApp/parts')
+@app.route('/registerAdmin')
+    return RegistrationHandler().registerAdmin()
+
+@app.route('/registerSupplier')
+    return RegistrationHandler().registerSupplier()
+
+@app.route('/registerRequester')
+    return RegistrationHandler().registerRequester()
+
+@app.route('/ResourceRequest/Resource/<string:Rname>')
+def getResourceByRname(Rname):
+    return RequestHandler().getResourceByRname(Rname)
+
+#Hasta aqui son nuestras rutas por ahora
+
+
+
+@app.route('/registerAdmin')
 def getAllParts():
     if not request.args:
-        return PartHandler().getAllParts()
+        return RegistrationHandler().registerAdmin()
     else:
         return PartHandler().searchParts(request.args)
+
 
 @app.route('/PartApp/parts/<int:pid>')
 def getPartById(pid):
