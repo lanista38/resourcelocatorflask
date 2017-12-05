@@ -1,11 +1,18 @@
 -- This file contains the definitions of the tables used in the application.
 --
--- Part table
-create table parts(pid serial primary key, pname varchar(20), pmaterial varchar(10), pcolor varchar(10), pprice float);
+-- Resource table
+create table Resource(Rid serial primary key, Rname varchar(20), RlastName varchar(20),
+  Rprice double, Rqty int, Rregion varchar(10), Sid integer references Supplier(sid));
 
 -- Supplier table
-create table supplier(sid serial primary key, sname varchar(10), scity varchar(10), sphone varchar(10));
+create table Supplier(Sid serial primary key, Sname varchar(10), SlastName varchar(20),
+  Sgpsx double, Sgpsy double, Saddress varchar(20));
 
--- Supplies table
-create table supplies(pid integer references Parts(pid), sid integer references
-Supplier(sid), qty integer, primary key(pid, sid));
+
+
+create table Rperson(RPid serial primary key, RPname varchar(20), RPlastName varchar(20),
+  RPcity varchar(20), RPgpsx double, RPgpsy double, RPaddress varchar(20), RPregion varchar(20));
+
+create table ResourceRequest(Rdate varchar(10));
+
+create table Purchase(Pdate varchar(10));
