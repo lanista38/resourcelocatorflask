@@ -11,24 +11,13 @@ from handler.announcement import AnnouncementHandler
 from handler.category import CategoryHandler
 
 
-paragraph = '/ResourceLocator/suppliers'
-para = '/ResourceLocator/suppliers/<int:sid>'
-para1 = '/ResourceLocator/requests/<int:Rid> '
-paragraph1 = '/ResourceLocator/requests/<int:RPid>'
-parag1 = '/ResourceLocator/purchases'
-parag2 = '/ResourceLocator/purchases/<int:Rid>'
-paragraph2 = '/ResourceLocator/purchases/<int:RPid> \n/ResourceLocator/registerAdmin \n /ResourceLocator/registerSupplier \n'
 
-paragraph3 = '/ResourceLocator/registerRequester \n/ResourceLocator/ResourceRequest/Resource/<string:Rname> \n'
-paragraph4 = '/ResourceLocator/AnnounceResource/Resource/<string:Rname> \n/ResourceLocator/BrowseAnnouncements/ \n'
-paragraph5 = '/ResourceLocator/BrowseRequests/ \n/ResourceLocator/SearchRequests/Resource/<string:Rname> \n/ResourceLocator/SearchAnnounce/Resource/<string:Rname> \n'
-paragraph6 = '/ResourceLocator/ShowDashRequests/days/<int:days>/Region/<string:Region> \n/ResourceLocator/ShowDashAnnouncements/days/<int:days>/Region/<string:Region> \n /ResourceLocator/ShowDashByMatches/days/<int:days>/Region/<string:Region> \n '
 
 app = Flask(__name__)
 
 @app.route('/')
 def greeting():
-    return paragraph +para+para1+ paragraph2 + paragraph3 + paragraph4 + paragraph5 + paragraph6
+    return ' Welcome to Resource locator app'
 
 
 @app.route('/ResourceLocator/suppliers')
