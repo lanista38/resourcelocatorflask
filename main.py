@@ -107,7 +107,5 @@ def ShowDashByMatches(days, Region):
     return DashboardHandler().getDailyStatisticsByMatches(days,Region)
 
 
-#Hasta aqui son nuestras rutas por ahora
-
 if __name__ == '__main__':
     app.run()
