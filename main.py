@@ -12,18 +12,25 @@ para1 = '/ResourceLocator/requests/<int:Rid> '
 paragraph1 = '/ResourceLocator/requests/<int:RPid>'
 parag1 = '/ResourceLocator/purchases'
 parag2 = '/ResourceLocator/purchases/<int:Rid>'
-paragraph2 = '/ResourceLocator/purchases/<int:RPid> \n/ResourceLocator/registerAdmin \n /ResourceLocator/registerSupplier \n'
-paragr = 
-paragraph3 = '/ResourceLocator/registerRequester \n/ResourceLocator/ResourceRequest/Resource/<string:Rname> \n'
-paragraph4 = '/ResourceLocator/AnnounceResource/Resource/<string:Rname> \n/ResourceLocator/BrowseAnnouncements/ \n'
-paragraph5 = '/ResourceLocator/BrowseRequests/ \n/ResourceLocator/SearchRequests/Resource/<string:Rname> \n/ResourceLocator/SearchAnnounce/Resource/<string:Rname> \n'
-paragraph6 = '/ResourceLocator/ShowDashRequests/days/<int:days>/Region/<string:Region> \n/ResourceLocator/ShowDashAnnouncements/days/<int:days>/Region/<string:Region> \n /ResourceLocator/ShowDashByMatches/days/<int:days>/Region/<string:Region> \n '
+paragraph2 = '/ResourceLocator/purchases/<int:RPid>'
+paragr1 = '/ResourceLocator/registerAdmin'
+paragr2 = '/ResourceLocator/registerSupplier'
+paragraph3 = '/ResourceLocator/registerRequester'
+paragra1 = '/ResourceLocator/ResourceRequest/Resource/<string:Rname>'
+paragraph4 = '/ResourceLocator/AnnounceResource/Resource/<string:Rname>'
+paragra2 = '/ResourceLocator/BrowseAnnouncements/'
+paragraph5 = '/ResourceLocator/BrowseRequests/'
+paragrap1 = '/ResourceLocator/SearchRequests/Resource/<string:Rname>'
+paragrap2 = '/ResourceLocator/SearchAnnounce/Resource/<string:Rname>'
+paragraph6 = '/ResourceLocator/ShowDashRequests/days/<int:days>/Region/<string:Region>'
+paragraph7 = '/ResourceLocator/ShowDashAnnouncements/days/<int:days>/Region/<string:Region>'
+paragraph8 = '/ResourceLocator/ShowDashByMatches/days/<int:days>/Region/<string:Region>'
 
 app = Flask(__name__)
 
 @app.route('/')
 def greeting():
-    return paragraph +para+para1+ paragraph2 + paragraph3 + paragraph4 + paragraph5 + paragraph6
+    return 'List of routes:'+ paragraph + para + para1 + paragraph1 + parag1+parag2+ paragraph2+paragr1+paragr2 + paragraph3+paragra1 + paragraph4+paragra2 + paragraph5+paragrap1+paragrap2 + paragraph6 +paragraph7+paragraph8
 
 
 @app.route('/ResourceLocator/suppliers')
