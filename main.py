@@ -9,7 +9,7 @@ from handler.announcement import AnnouncementHandler
 paragraph = '/ResourceLocator/suppliers /n /ResourceLocator/suppliers/<int:sid> /n /ResourceLocator/requests/<int:Rid> /n'
 paragraph1 = '/ResourceLocator/requests/<int:RPid> /n /ResourceLocator/purchases /n /ResourceLocator/purchases/<int:Rid> /n'
 paragraph2 = '/ResourceLocator/purchases/<int:RPid> /n /ResourceLocator/registerAdmin /n /ResourceLocator/registerSupplier /n'
-paragraph3 = '/ResourceLocator/registerRequester /n '
+paragraph3 = '/ResourceLocator/registerRequester /n ' 
 
 app = Flask(__name__)
 
