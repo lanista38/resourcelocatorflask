@@ -1,7 +1,7 @@
 from flask import jsonify
 
 class AnnouncementHandler:
-    def build_announcement_dict(self,row):
+    def build_announcement_dict(self):
         dict = {'Pid':'324','Rid':'324','ADate':'hoy','APqty':'1'}
         return dict
 
