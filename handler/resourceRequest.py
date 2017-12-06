@@ -11,6 +11,7 @@ class RequestHandler:
         return dict
 
     def getAllRequests(self):
+<<<<<<< HEAD
 
         res = self.build_request_dict()
         return jsonify(res)
@@ -24,3 +25,10 @@ class RequestHandler:
 
         res = self.build_request_dict()
         return jsonify(res)
+=======
+        return 0
+    def getResourceByRname(self,Rname):
+        return 0
+    def getRequestByResource(self,Rname):
+        return 0
+>>>>>>> branch-alfredo-jorge
