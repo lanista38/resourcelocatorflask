@@ -6,6 +6,9 @@ from handler.registration import RegistrationHandler
 from handler.dashboard import DashboardHandler
 from handler.announcement import AnnouncementHandler
 
+from handler.category import CategoryHandler
+from handler.resource import ResourceHandler
+
 paragraph = '/ResourceLocator/suppliers'
 para = '/ResourceLocator/suppliers/<int:sid>'
 para1 = '/ResourceLocator/requests/<int:Rid> '
@@ -117,6 +120,34 @@ def ShowDashAnnouncements(days, Region):
 def ShowDashByMatches(days, Region):
     return DashboardHandler().getDailyStatisticsByMatches(days,Region)
 
+@app.route('/PartApp/category')
+def getAllCategories():
+    return CategoryHandler().getAllCategories()
+
+@app.route('/PartApp/category/<int:Cid>')
+def getCategoryByCid(Cid):
+    return CategoryHandler().getCategoryByCid(Cid)
+
+@app.route('/PartApp/category/<string:name>')
+def getCategoryByCName(name):
+    return CategoryHandler().getCategoryByCname(name)
+
+#Resource routes
+
+@app.route('/PartApp/resource')
+def getAllResources():
+    if not request.args:
+        return ResourceHandler().getAllResources()
+    else:
+        return ResourceHandler().search(request.args)
+
+@app.route('/PartApp/resource/<int:Rid>')
+def getResourceByRid(Rid):
+    return ResourceHandler().getResourceByRid(Rid)
+
+@app.route('/PartApp/resource/<string:name>')
+def getResourceByName(name):
+    return ResourceHandler().getResourceByName(name)
 
 if __name__ == '__main__':
     app.run()
