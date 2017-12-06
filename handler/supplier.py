@@ -4,7 +4,7 @@ from flask import jsonify
 
 class SupplierHandler:
     def build_supplier_dict(self):
-        dict = {'Rid': '123', 'date': 2017, 'Qty': 5, 'price' : 55}
+        dict = {'Pid': '123', 'Name': 'Juan', 'lastName': 'Cruz', 'Company' : 'Microsoft'}
 
         #result = {}
         #result['sid'] = row[0]
