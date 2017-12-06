@@ -9,13 +9,16 @@ from handler.announcement import AnnouncementHandler
 paragraph = '/ResourceLocator/suppliers /n /ResourceLocator/suppliers/<int:sid> /n /ResourceLocator/requests/<int:Rid> /n'
 paragraph1 = '/ResourceLocator/requests/<int:RPid> /n /ResourceLocator/purchases /n /ResourceLocator/purchases/<int:Rid> /n'
 paragraph2 = '/ResourceLocator/purchases/<int:RPid> /n /ResourceLocator/registerAdmin /n /ResourceLocator/registerSupplier /n'
-paragraph3 = '/ResourceLocator/registerRequester /n '
+paragraph3 = '/ResourceLocator/registerRequester /n /ResourceLocator/ResourceRequest/Resource/<string:Rname> /n'
+paragraph4 = '/ResourceLocator/AnnounceResource/Resource/<string:Rname> /n /ResourceLocator/BrowseAnnouncements/ /n'
+paragraph5 = '/ResourceLocator/BrowseRequests/ /n /ResourceLocator/SearchRequests/Resource/<string:Rname> /n /ResourceLocator/SearchAnnounce/Resource/<string:Rname> /n'
+paragraph6 = '/ResourceLocator/ShowDashRequests/days/<int:days>/Region/<string:Region> /n /ResourceLocator/ShowDashAnnouncements/days/<int:days>/Region/<string:Region> /n /ResourceLocator/ShowDashByMatches/days/<int:days>/Region/<string:Region> /n'
 
 app = Flask(__name__)
 
 @app.route('/')
 def greeting():
-    return ''
+    return paragraph + paragraph2 + paragraph3 + paragraph4 + paragraph5 + paragraph6
 
 
 @app.route('/ResourceLocator/suppliers')
