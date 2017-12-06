@@ -2,8 +2,8 @@ from flask import jsonify
 
 class RegistrationHandler:
     def registerAdmin(self):
-        return
+        return "Admin created!"
     def registerSupplier(self):
-        return
+        return "Supplier created!"
     def registerRequester(self):
-        return
+        return "Customer created!"
