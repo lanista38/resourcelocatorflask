@@ -7,7 +7,7 @@ class AnnouncementHandler:
 
     def getAllAnnouncements(self):
         result = self.build_announcement_dict()
-        return result
+        return jsonify(result)
 
     def AnnounceResource(self,Rname):
         return 0
