@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from handler.resource import ResourceHandler
 from handler.supplier import SupplierHandler
 from handler.resourceRequest import RequestHandler
 from handler.purchaseReserve import PurchaseHandler
@@ -7,7 +8,7 @@ from handler.dashboard import DashboardHandler
 from handler.announcement import AnnouncementHandler
 
 from handler.category import CategoryHandler
-from handler.resource import ResourceHandler
+
 
 paragraph = '/ResourceLocator/suppliers'
 para = '/ResourceLocator/suppliers/<int:sid>'
@@ -16,7 +17,7 @@ paragraph1 = '/ResourceLocator/requests/<int:RPid>'
 parag1 = '/ResourceLocator/purchases'
 parag2 = '/ResourceLocator/purchases/<int:Rid>'
 paragraph2 = '/ResourceLocator/purchases/<int:RPid> \n/ResourceLocator/registerAdmin \n /ResourceLocator/registerSupplier \n'
-paragr = 
+
 paragraph3 = '/ResourceLocator/registerRequester \n/ResourceLocator/ResourceRequest/Resource/<string:Rname> \n'
 paragraph4 = '/ResourceLocator/AnnounceResource/Resource/<string:Rname> \n/ResourceLocator/BrowseAnnouncements/ \n'
 paragraph5 = '/ResourceLocator/BrowseRequests/ \n/ResourceLocator/SearchRequests/Resource/<string:Rname> \n/ResourceLocator/SearchAnnounce/Resource/<string:Rname> \n'
@@ -36,20 +37,24 @@ def getAllSuppliers():
     else:
         return SupplierHandler().searchSuppliers(request.args)
 
+
 @app.route('/ResourceLocator/suppliers/<int:sid>')
 def getSupplierById(sid):
     return SupplierHandler().getSupplierById(sid)
 
 
 # Resource Requests routes
+@app.route('/ResourceLocator/BrowseRequests/')
+def getAllRequests():
+    return RequestHandler().getAllRequests()
 
 @app.route('/ResourceLocator/requests/<int:Rid>')
 def getRequestById(Rid):
     return RequestHandler().getRequestByRid(Rid)
 
 @app.route('/ResourceLocator/requests/<int:RPid>')
-def getRequestByRPId(RPid):
-    return RequestHandler().getRequestByRPId(RPid)
+def getRequestByRPId(Rid):
+    return RequestHandler().getRequestByRid(Rid)
 
 
 #Reserve/Purchase routes
@@ -93,9 +98,7 @@ def postAnnouncement(Rname):
 def getAllAnnouncements():
     return AnnouncementHandler().getAllAnnouncements()
 
-@app.route('/ResourceLocator/BrowseRequests/')
-def getAllRequests():
-    return RequestHandler().getAllRequests()
+
 
 
 #SEARCH endpoints
@@ -120,34 +123,38 @@ def ShowDashAnnouncements(days, Region):
 def ShowDashByMatches(days, Region):
     return DashboardHandler().getDailyStatisticsByMatches(days,Region)
 
-@app.route('/PartApp/category')
+
+#Category routes
+
+@app.route('/ResourceLocator/category')
 def getAllCategories():
     return CategoryHandler().getAllCategories()
 
-@app.route('/PartApp/category/<int:Cid>')
+@app.route('/ResourceLocator/category/<int:Cid>')
 def getCategoryByCid(Cid):
     return CategoryHandler().getCategoryByCid(Cid)
 
-@app.route('/PartApp/category/<string:name>')
+@app.route('/ResourceLocator/category/<string:name>')
 def getCategoryByCName(name):
     return CategoryHandler().getCategoryByCname(name)
 
 #Resource routes
 
-@app.route('/PartApp/resource')
+@app.route('/ResourceLocator/resource')
 def getAllResources():
     if not request.args:
         return ResourceHandler().getAllResources()
     else:
         return ResourceHandler().search(request.args)
 
-@app.route('/PartApp/resource/<int:Rid>')
+@app.route('/ResourceLocator/resource/<int:Rid>')
 def getResourceByRid(Rid):
     return ResourceHandler().getResourceByRid(Rid)
 
-@app.route('/PartApp/resource/<string:name>')
+@app.route('/ResourceLocator/resource/<string:name>')
 def getResourceByName(name):
     return ResourceHandler().getResourceByName(name)
+
 
 if __name__ == '__main__':
     app.run()
