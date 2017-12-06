@@ -6,6 +6,7 @@ from handler.registration import RegistrationHandler
 from handler.dashboard import DashboardHandler
 from handler.announcement import AnnouncementHandler
 
+<<<<<<< HEAD
 paragraph = '/ResourceLocator/suppliers'
 para = '/ResourceLocator/suppliers/<int:sid>'
 para1 = '/ResourceLocator/requests/<int:Rid> '
@@ -17,6 +18,19 @@ paragraph3 = '/ResourceLocator/registerRequester \n/ResourceLocator/ResourceRequ
 paragraph4 = '/ResourceLocator/AnnounceResource/Resource/<string:Rname> \n/ResourceLocator/BrowseAnnouncements/ \n'
 paragraph5 = '/ResourceLocator/BrowseRequests/ \n/ResourceLocator/SearchRequests/Resource/<string:Rname> \n/ResourceLocator/SearchAnnounce/Resource/<string:Rname> \n'
 paragraph6 = '/ResourceLocator/ShowDashRequests/days/<int:days>/Region/<string:Region> \n/ResourceLocator/ShowDashAnnouncements/days/<int:days>/Region/<string:Region> \n /ResourceLocator/ShowDashByMatches/days/<int:days>/Region/<string:Region> \n '
+=======
+paragraph = '/ResourceLocator/suppliers /n /ResourceLocator/suppliers/<int:sid> /n /ResourceLocator/requests/<int:Rid> /n'
+paragraph1 = '/ResourceLocator/requests/<int:RPid> /n /ResourceLocator/purchases /n /ResourceLocator/purchases/<int:Rid> /n'
+paragraph2 = '/ResourceLocator/purchases/<int:RPid> /n /ResourceLocator/registerAdmin /n /ResourceLocator/registerSupplier /n'
+<<<<<<< HEAD
+paragraph3 = '/ResourceLocator/registerRequester /n ' 
+=======
+paragraph3 = '/ResourceLocator/registerRequester /n /ResourceLocator/ResourceRequest/Resource/<string:Rname> /n'
+paragraph4 = '/ResourceLocator/AnnounceResource/Resource/<string:Rname> /n /ResourceLocator/BrowseAnnouncements/ /n'
+paragraph5 = '/ResourceLocator/BrowseRequests/ /n /ResourceLocator/SearchRequests/Resource/<string:Rname> /n /ResourceLocator/SearchAnnounce/Resource/<string:Rname> /n'
+paragraph6 = '/ResourceLocator/ShowDashRequests/days/<int:days>/Region/<string:Region> /n /ResourceLocator/ShowDashAnnouncements/days/<int:days>/Region/<string:Region> /n /ResourceLocator/ShowDashByMatches/days/<int:days>/Region/<string:Region> /n'
+>>>>>>> 4018aea0438a3733515117851042ce5438b3721e
+>>>>>>> 424fb3cc845877afdb7f79a3a8cb88dfc6006d92
 
 app = Flask(__name__)
 
