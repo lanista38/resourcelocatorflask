@@ -6,19 +6,23 @@ from handler.registration import RegistrationHandler
 from handler.dashboard import DashboardHandler
 from handler.announcement import AnnouncementHandler
 
-paragraph = '/ResourceLocator/suppliers /n /ResourceLocator/suppliers/<int:sid> /n /ResourceLocator/requests/<int:Rid> /n'
-paragraph1 = '/ResourceLocator/requests/<int:RPid> /n /ResourceLocator/purchases /n /ResourceLocator/purchases/<int:Rid> /n'
-paragraph2 = '/ResourceLocator/purchases/<int:RPid> /n /ResourceLocator/registerAdmin /n /ResourceLocator/registerSupplier /n'
-paragraph3 = '/ResourceLocator/registerRequester /n /ResourceLocator/ResourceRequest/Resource/<string:Rname> /n'
-paragraph4 = '/ResourceLocator/AnnounceResource/Resource/<string:Rname> /n /ResourceLocator/BrowseAnnouncements/ /n'
-paragraph5 = '/ResourceLocator/BrowseRequests/ /n /ResourceLocator/SearchRequests/Resource/<string:Rname> /n /ResourceLocator/SearchAnnounce/Resource/<string:Rname> /n'
-paragraph6 = '/ResourceLocator/ShowDashRequests/days/<int:days>/Region/<string:Region> /n /ResourceLocator/ShowDashAnnouncements/days/<int:days>/Region/<string:Region> /n /ResourceLocator/ShowDashByMatches/days/<int:days>/Region/<string:Region> /n'
+paragraph = '/ResourceLocator/suppliers'
+para = '/ResourceLocator/suppliers/<int:sid>'
+para1 = '/ResourceLocator/requests/<int:Rid> '
+paragraph1 = '/ResourceLocator/requests/<int:RPid>'
+parag1 = '/ResourceLocator/purchases'
+parag2 = '/ResourceLocator/purchases/<int:Rid>'
+paragraph2 = '/ResourceLocator/purchases/<int:RPid> \n/ResourceLocator/registerAdmin \n /ResourceLocator/registerSupplier \n'
+paragraph3 = '/ResourceLocator/registerRequester \n/ResourceLocator/ResourceRequest/Resource/<string:Rname> \n'
+paragraph4 = '/ResourceLocator/AnnounceResource/Resource/<string:Rname> \n/ResourceLocator/BrowseAnnouncements/ \n'
+paragraph5 = '/ResourceLocator/BrowseRequests/ \n/ResourceLocator/SearchRequests/Resource/<string:Rname> \n/ResourceLocator/SearchAnnounce/Resource/<string:Rname> \n'
+paragraph6 = '/ResourceLocator/ShowDashRequests/days/<int:days>/Region/<string:Region> \n/ResourceLocator/ShowDashAnnouncements/days/<int:days>/Region/<string:Region> \n /ResourceLocator/ShowDashByMatches/days/<int:days>/Region/<string:Region> \n '
 
 app = Flask(__name__)
 
 @app.route('/')
 def greeting():
-    return paragraph + paragraph2 + paragraph3 + paragraph4 + paragraph5 + paragraph6
+    return paragraph +para+para1+ paragraph2 + paragraph3 + paragraph4 + paragraph5 + paragraph6
 
 
 @app.route('/ResourceLocator/suppliers')
