@@ -1,19 +1,24 @@
 -- This file contains the definitions of the tables used in the application.
 --
--- Resource table
-create table Resource(Rid serial primary key, Rname varchar(20), RlastName varchar(20),
-  Rprice double, Rqty int, Rregion varchar(10), Sid integer references Supplier(sid));
 
--- Supplier table
-create table Supplier(Sid serial primary key, Sname varchar(10), SlastName varchar(20),
-  Sgpsx double, Sgpsy double, Saddress varchar(20));
+create table Resource(Rid serial primary key, Rname varchar(20), Cid integer references Category(Cid), Sid integer references Person(Pid), Rprice double, Rqty integer, Rregion varchar(20));
 
+create table Supplier(Pid serial primary key, company varchar(150));
 
+create table Customer(Pid serial primary key, city varchar(20), region varchar(20)
 
-create table Rperson(RPid serial primary key, RPname varchar(20), RPlastName varchar(20),
-  RPcity varchar(20), RPgpsx double, RPgpsy double, RPaddress varchar(20), RPregion varchar(20));
+create table Category(Cid serial primary key, Cname varchar(20));
+
+create table Admin(Aid serial primary key, Aname varchar(20), AlastName varchar(20), user varchar(20), password varchar(150), email varchar(20));
+
+create table Person(Pid serial primary keyname varchar(20), name varchar(20), lastName varchar(20), gpsx double, gpsy double, address varchar(120), region varchar(20));
 
 create table ResourceRequest(Rid integer references Resource(Rid), RPid integer references Rperson(RPid),
   Rdate varchar(10), primary key(Rid, RPid));
 
-create table Purchase(Pdate varchar(10));
+-- Relationships
+create table ResourceRequest(Pid serial primary key, Rid serial primary key, RRqty integer, RRDate date);
+create table Reserve(Pid serial primary key, Rid serial primary key, RDate date, Rqty integer);
+create table Announcement(Pid serial primary key, Rid serial primary key, ADate date, APqty integer);
+create table Purchase(Pid serial primary key, Rid serial primary key, Pdate varchar(20), Pprice varchar(20), Pqty integer);
+create table isSubCategory(Cid serial primary key, Cname varchar(20));

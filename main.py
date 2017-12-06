@@ -6,13 +6,16 @@ from handler.registration import RegistrationHandler
 from handler.dashboard import DashboardHandler
 from handler.announcement import AnnouncementHandler
 
-
+paragraph = '/ResourceLocator/suppliers /n /ResourceLocator/suppliers/<int:sid> /n /ResourceLocator/requests/<int:Rid> /n'
+paragraph1 = '/ResourceLocator/requests/<int:RPid> /n /ResourceLocator/purchases /n /ResourceLocator/purchases/<int:Rid> /n'
+paragraph2 = '/ResourceLocator/purchases/<int:RPid> /n /ResourceLocator/registerAdmin /n /ResourceLocator/registerSupplier /n'
+paragraph3 = '/ResourceLocator/registerRequester /n '
 
 app = Flask(__name__)
 
 @app.route('/')
 def greeting():
-    return 'Hello, this is the parts DB App!'
+    return ''
 
 
 @app.route('/ResourceLocator/suppliers')
@@ -106,8 +109,6 @@ def ShowDashAnnouncements(days, Region):
 def ShowDashByMatches(days, Region):
     return DashboardHandler().getDailyStatisticsByMatches(days,Region)
 
-
-#Hasta aqui son nuestras rutas por ahora
 
 if __name__ == '__main__':
     app.run()
