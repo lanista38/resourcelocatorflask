@@ -42,12 +42,15 @@ class ResourceHandler:
     def search(self, args):
         price = args.get("price")
         region = args.get("region")
+        category = args.get("category")
         parts_list = []
         if (len(args) == 2) and price and region:
             parts_list = self.getAllResources()
         elif (len(args) == 1) and price:
             parts_list = self.getAllResources()
         elif (len(args) == 1) and region:
+            parts_list = self.getAllResources()
+        elif (len(args) == 1) and category:
             parts_list = self.getAllResources()
         else:
             return jsonify(Error = "Malformed query string"), 400
