@@ -39,3 +39,13 @@ class SupplierDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    #Operation 15
+    def getSupplierByResource(self,Rid):
+        cursor = self.conn.cursor()
+        query =" select * from Person natural inner join Announcement where Rid = %s;"
+        cursor.execute(query,(Rid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
