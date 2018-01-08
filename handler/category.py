@@ -1,5 +1,5 @@
 from flask import jsonify
-
+from dao.category import CategoryDAO
 class CategoryHandler:
     #Dictionary to be revised
 
@@ -7,6 +7,7 @@ class CategoryHandler:
         result = {}
         result['Cid'] = row[0]
         result['Cname'] = row[1]
+        return result
 
     def build_resource_dict(self):
         dict = [{'Cid': '123', 'Cname': 2017},
@@ -17,8 +18,13 @@ class CategoryHandler:
         return dict
 
     def getAllCategories(self):
-        result=self.build_resource_dict()
-        return jsonify(result)
+        dao = CategoryDAO()
+        parts_list = dao.getAllCategories()
+        result_list = []
+        for row in parts_list:
+            result = self.build_part_dict(row)
+            result_list.append(result)
+        return jsonify(Parts=result_list)
 
     def getCategoryByCid(self, Cid):
         result=self.build_resource_dict()

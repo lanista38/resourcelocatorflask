@@ -1,4 +1,5 @@
 from flask import jsonify
+from dao.resource import ResourceDAO
 
 class ResourceHandler:
     #Dictionary to be revised
@@ -7,12 +8,15 @@ class ResourceHandler:
         result = {}
         result['Rid'] = row[0]
         result['Rname'] = row[1]
-        result['Rprice'] = row[2]
-        result['Rqty'] = row[3]
-        result['Rregion'] = row[4]
+        result['Cid'] = row[2]
+        result['Sid'] = row[3]
+        result['Rprice'] = row[4]
+        result['Rqty'] = row[5]
+        result['Rregion'] = row[6]
+        return result
 
     def build_resource_dict(self):
-        dict = [{'Rid': '123', 'Rname': 2017,'Rprice': 4,'Rqty':15,'Rregion':'Oeste'},
+        dict = [{'Rid': '123', 'Rname': Agua,'Rprice': 4,'Rqty':15,'Rregion':'Oeste'},
                 {'Rid': '542', 'Rname': 2017,'Rprice': 4,'Rqty':15,'Rregion':'Oeste'},
                 {'Rid': '458', 'Rname': 2017, 'Rprice': 4, 'Rqty': 15, 'Rregion': 'Oeste'},
                 {'Rid': '785', 'Rname': 2017, 'Rprice': 4, 'Rqty': 15, 'Rregion': 'Oeste'},
@@ -20,8 +24,13 @@ class ResourceHandler:
         return dict
 
     def getAllResources(self):
-        result=self.build_resource_dict()
-        return jsonify(result)
+        dao = ResourceDAO()
+        parts_list = dao.getAllResources()
+        result_list = []
+        for row in parts_list:
+            result = self.build_part_dict(row)
+            result_list.append(result)
+        return jsonify(Parts=result_list)
 
     def getResourceByRid(self, Rid):
         result=self.build_resource_dict()

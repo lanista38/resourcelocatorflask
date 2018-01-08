@@ -11,7 +11,7 @@ create table Category(Cid serial primary key, Cname varchar(20));
 
 create table Admin(Aid serial primary key, Aname varchar(20), AlastName varchar(20), user varchar(20), password varchar(150), email varchar(20));
 
-create table Person(Pid serial primary keyname varchar(20), name varchar(20), lastName varchar(20), gpsx double, gpsy double, address varchar(120), region varchar(20));
+create table Person(Pid serial primary key, name varchar(20), lastName varchar(20), gpsx double, gpsy double, address varchar(120), region varchar(20));
 
 create table ResourceRequest(Rid integer references Resource(Rid), RPid integer references Rperson(RPid),
   Rdate varchar(10), primary key(Rid, RPid));
