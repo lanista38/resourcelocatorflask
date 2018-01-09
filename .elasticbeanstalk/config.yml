@@ -1,0 +1,20 @@
+branch-defaults:
+  Phase2(In-Progress):
+    environment: resourcelocatorflask-dev
+environment-defaults:
+  resourcelocatorflask-dev:
+    branch: null
+    repository: null
+global:
+  application_name: resourcelocatorflask
+  default_ec2_keyname: null
+  default_platform: arn:aws:elasticbeanstalk:us-east-1::platform/Python 2.7 running
+    on 64bit Amazon Linux/2.6.2
+  default_region: us-east-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  sc: git
+  workspace_type: Application
