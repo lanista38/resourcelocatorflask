@@ -62,4 +62,3 @@ class ResourceDAO:
         for row in cursor:
             result.append(row)
         return result
-    
