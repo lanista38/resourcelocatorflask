@@ -2,8 +2,14 @@ from flask import jsonify
 
 class AnnouncementHandler:
     def build_announcement_dict(self):
-        dict = {'Pid':'324','Rid':'324','ADate':'hoy','APqty':'1'}
-        return dict
+        result = {}
+        result["Pid"] = row[0]
+        result["Rid"] = row[1]
+        result["Adate"] = row[2]
+        result["Apqty"] = row[3]
+        result["region"] = row[4]
+        result["Aprice"] = row[5]
+        return result
 
     def getAllAnnouncements(self):
         result = self.build_announcement_dict()
