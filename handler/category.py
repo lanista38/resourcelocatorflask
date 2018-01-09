@@ -22,7 +22,7 @@ class CategoryHandler:
         parts_list = dao.getAllCategories()
         result_list = []
         for row in parts_list:
-            result = self.build_part_dict(row)
+            result = self.build_category_dict(row)
             result_list.append(result)
         return jsonify(Parts=result_list)
 

@@ -7,6 +7,7 @@ class ResourceRequestDAO:
     def getAllRequests(self):
         cursor = self.conn.cursor()
         query = "select * from ResourceRequest"
+        cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
