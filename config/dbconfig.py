@@ -1,7 +1,8 @@
 #Databse configuration information
 
 pg_config = {
-    'user' : 'postgres',
+    'hostname':'18.220.108.30',
+    'user' : 'lanista',
     'passwd' : 'king',
-    'dbname' : 'postgres'
+    'dbname' : 'resourcelocatordb2'
 }

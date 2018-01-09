@@ -7,9 +7,10 @@ class AnnouncementDAO:
                                                             pg_config['user'],
                                                             pg_config['passwd'])
 
-#Operation 18
+
         self.conn = psycopg2._connect(connection_url)
 
+#Operation 7
         def getAllAnnouncements(self):
             cursor = self.conn.cursor()
             query = "select * from Announcement;"
@@ -19,6 +20,7 @@ class AnnouncementDAO:
                 result.append(row)
             return result
 
+#Operation 18
         def getAnnouncementByPid(self,Pid):
             cursor = self.conn.cursor()
             query = "select * from Announcement where Pid = %s;"

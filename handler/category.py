@@ -19,16 +19,21 @@ class CategoryHandler:
 
     def getAllCategories(self):
         dao = CategoryDAO()
-        parts_list = dao.getAllCategories()
+        category_list = dao.getAllCategories()
         result_list = []
-        for row in parts_list:
-            result = self.build_part_dict(row)
+        for row in category_list:
+            result = self.build_category_dict(row)
             result_list.append(result)
         return jsonify(Parts=result_list)
 
     def getCategoryByCid(self, Cid):
-        result=self.build_resource_dict()
-        return jsonify(result)
+        dao = CategoryDAO()
+        category_list = dao.getCategoryByCid(Cid)
+        result_list = []
+        for row in category_list:
+            result = self.build_category_dict(row)
+            result_list.append(result)
+        return jsonify(Parts=result_list)
 
     def getCategoryByCname(self, Cname):
         result=self.build_resource_dict()

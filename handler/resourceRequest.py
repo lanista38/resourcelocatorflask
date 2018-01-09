@@ -3,7 +3,7 @@ from flask import jsonify
 class RequestHandler:
 
     #Dictionary to be revised
- def build_request_dict(self):
+    def build_request_dict(self):
         result = {}
         result['Cid'] = row[0]
         result['Rid'] = row[1]

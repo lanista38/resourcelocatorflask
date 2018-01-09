@@ -4,6 +4,7 @@ import psycopg2
 class ResourceRequestDAO:
     def __init__(self):
 
+# Operation 7
     def getAllRequests(self):
         cursor = self.conn.cursor()
         query = "select * from ResourceRequest"
