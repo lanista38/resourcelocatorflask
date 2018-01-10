@@ -132,7 +132,6 @@ def getCategoryByCName(name):
     return CategoryHandler().getCategoryByCname(name)
 
 #Resource routes
-
 @app.route('/ResourceLocator/resource')
 def getAllResources():
     if not request.args:
@@ -147,6 +146,22 @@ def getResourceByRid(Rid):
 @app.route('/ResourceLocator/resource/<string:name>')
 def getResourceByName(name):
     return ResourceHandler().getResourceByName(name)
+
+@app.route('/ResourceLocator/resource/category/<int:Rid>')
+def getResourcesByCid(Rid):
+    return ResourceHandler().getResourcesByCid(Rid)
+
+@app.route('/ResourceLocator/resource/category/<string:name>')
+def getResourceByCategoryName(name):
+    return ResourceHandler().getResourceByCategoryName(name)
+
+@app.route('/ResourceLocator/resource/<string:name>/supplier/<int:Sid>')
+def getResourceBySupplier(name,Sid):
+    return ResourceHandler().getResourceBySupplier(name,Sid)
+
+@app.route('/ResourceLocator/resource/<int:rid>/region/<int:tid>')
+def getResourceByIdRegion(rid,tid):
+    return ResourceHandler().getResourceByIdRegion(rid,tid)
 
 
 if __name__ == '__main__':
