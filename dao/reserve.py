@@ -7,7 +7,7 @@ class ReserveDAO:
                                                             pg_config['user'],
                                                             pg_config['passwd'])
 
-#Operacion 17
+  #Operacion 17
         self.conn = psycopg2._connect(connection_url)
 
         def getAllReservations(self):
