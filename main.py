@@ -110,7 +110,7 @@ def searchRequestsAll():
 #Operation 15. Encontrar suplidores para un producto dado (e.g., diesel)
 @app.route('/ResourceLocator/SearchSupplierByProduct/<string:rname')
 def searchSuppliersByResource(rname):
-    return SupplierHandler().getSuppliersByResourceName(rname)
+    return SupplierHandler().getSuppliersByResourceID(rname)
 
 
 

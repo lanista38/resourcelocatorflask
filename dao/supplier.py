@@ -55,9 +55,9 @@ class SupplierDAO:
         return result
 
     #Operation 15  change selects
-    def getSuppliersByResourceId(self, Rid):
+    def getSuppliersByResourceID(self, Rid):
         cursor = self.conn.cursor()
-        query = "select Sid, name, lastname, address, tid from supplier natural inner join announcement where rid = %s;"
+        query = "select * from supplier natural inner join announcement where rid = %s;"
         cursor.execute(query, (Rid,))
         result = []
         for row in cursor:
@@ -65,7 +65,7 @@ class SupplierDAO:
         return result
     def getSuppliersByResourceName(self, rname):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join announcement where rname = %s;"
+        query = "select * from supplier natural inner join announcement natural inner join Resource where rname = %s;"
         cursor.execute(query, (rname,))
         result = []
         for row in cursor:

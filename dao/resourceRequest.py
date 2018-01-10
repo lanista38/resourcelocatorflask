@@ -9,7 +9,7 @@ class ResourceRequestDAO:
 # Operation 7
     def getAllRequests(self):
         cursor = self.conn.cursor()
-        query = "select * from ResourceRequest"
+        query = "select * from Request"
         result = []
         for row in cursor:
             result.append(row)
@@ -26,7 +26,7 @@ class ResourceRequestDAO:
 
     def getRequestByResource(self, rname):
         cursor = self.conn.cursor()
-        query = "select * from request natural inner join resource where rname = %s;"
+        query = "select * from request r inner join resource rr on r.rid=rr.rid where rname = %s;"
         cursor.execute(query, (rname,))
         result = []
         for row in cursor:

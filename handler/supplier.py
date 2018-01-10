@@ -64,6 +64,15 @@ class SupplierHandler:
             result_list.append(result)
         return jsonify(Suppliers=result_list)
 
+        def getSuppliersByResourceID(self,rid):
+            dao = SupplierDAO()
+            supplier_list = dao.getSupplierByResourceID(rid)
+            result_list = []
+            for row in supplier_list:
+                result = self.build_supplier_dict(row)
+                result_list.append(result)
+            return jsonify(Suppliers=result_list)
+
     def searchSuppliers(self, args):
         town = args.get("town")
         material = args.get("company")
