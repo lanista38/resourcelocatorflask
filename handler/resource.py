@@ -25,42 +25,65 @@ class ResourceHandler:
 
     def getAllResources(self):
         dao = ResourceDAO()
-        parts_list = dao.getAllResources()
+        resource_list = dao.getAllResources()
         result_list = []
-        for row in parts_list:
-            result = self.build_part_dict(row)
+        for row in resource_list:
+            result = self.build_resource_dict(row)
             result_list.append(result)
-        return jsonify(Parts=result_list)
+        return jsonify(Resources=result_list)
 
     def getResourceByRid(self, Rid):
-        result=self.build_resource_dict()
-        return jsonify(result)
+        dao = ResourceDAO()
+        row = dao.getResourceByRid(Rid)
+        if not row:
+            return jsonify(Error = "Resource Not Found"), 404
+        else:
+            resource = self.build_resource_dict(row)
+            return jsonify(Resource = resource)
 
     def getResourceByName(self, Rname):
-        result=self.build_resource_dict()
-        return jsonify(result)
+        dao = ResourceDAO()
+        resource_list = dao.getResourceByName(Rname)
+        result_list = []
+        for row in resource_list:
+            result = self.build_resource_dict(row)
+            result_list.append(result)
+        return jsonify(Resources=result_list)
 
-    def getResourcesByCategoryId(self, Rid):
-        result=self.build_resource_dict()
-        return jsonify(result)
+    def getResourcesByCategoryId(self, Cid):
+        dao = ResourceDAO()
+        resource_list = dao.getAllResourcesByCategoryId(Cid)
+        result_list = []
+        for row in resource_list:
+            result = self.build_resource_dict(row)
+            result_list.append(result)
+        return jsonify(Resources=result_list)
 
-    def getResourcesByCategoryName(self, Rname):
-        result=self.build_resource_dict()
-        return jsonify(result)
+    def getResourcesByCategoryName(self, Cname):
+        dao = ResourceDAO()
+        resource_list = dao.getAllResourcesByCategoryName(Cname)
+        result_list = []
+        for row in resource_list:
+            result = self.build_resource_dict(row)
+            result_list.append(result)
+        return jsonify(Resources=result_list)
 
+
+# To-Do
     def search(self, args):
+        dao = ResourceDAO()
         price = args.get("price")
         region = args.get("region")
         category = args.get("category")
         parts_list = []
         if (len(args) == 2) and price and region:
-            parts_list = self.getAllResources()
+            resource_list =self.getAllResources()
         elif (len(args) == 1) and price:
             parts_list = self.getAllResources()
         elif (len(args) == 1) and region:
             parts_list = self.getAllResources()
         elif (len(args) == 1) and category:
-            parts_list = self.getAllResources()
+            resource_list = dao.getAllResourcesByCategoryName(category)
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []

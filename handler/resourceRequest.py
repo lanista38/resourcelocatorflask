@@ -9,6 +9,8 @@ class RequestHandler:
         result['Rid'] = row[1]
         result['RRqty'] = row[2]
         result['RRdate'] = row[3]
+        result['tid'] = row[4]
+        result['sid'] = row[5]
         return result
 
     def getAllRequests(self):
