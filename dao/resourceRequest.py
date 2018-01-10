@@ -17,17 +17,17 @@ class ResourceRequestDAO:
 
     def getRequestByRid(self, Rid):
         cursor = self.conn.cursor()
-        query = "select * from ResourceRequest where Rid = %s;"
+        query = "select * from Request where Rid = %s;"
         cursor.execute(query, (Rid,))
         result = []
         for row in cursor:
             result.append(row)
         return result
 
-    def getRequestByResource(self, Rname):
+    def getRequestByResource(self, rname):
         cursor = self.conn.cursor()
-        query = "select * from ResourceRequest where Rname = %s;"
-        cursor.execute(query, (Rname,))
+        query = "select * from Request natural inner join where rname = %s;"
+        cursor.execute(query, (rname,))
         result = []
         for row in cursor:
             result.append(row)
