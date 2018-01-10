@@ -1,8 +1,8 @@
 #Databse configuration information
 
 pg_config = {
-    'hostname':'18.220.108.30',
+    'hostname':'35.164.17.105',
     'user' : 'jorge',
-    'passwd' : 'king',
-    'dbname' : 'resourcelocatordb2'
+    'passwd' : '14312428',
+    'dbname' : 'resourcelocator2'
 }

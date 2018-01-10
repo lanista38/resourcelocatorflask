@@ -32,6 +32,9 @@ def getAllSuppliers():
 def getSupplierById(sid):
     return SupplierHandler().getSupplierById(sid)
 
+@app.route('/ResourceLocator/suppliers/<string:company>/town/<string:tname>')
+def getSuppliersByTownAndCompany(tname, company):
+    return SupplierHandler().searchSuppliers(tname, company)
 
 # Resource Requests routes
 @app.route('/ResourceLocator/BrowseRequests/')
