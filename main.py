@@ -138,6 +138,17 @@ def getAllResources():
         return ResourceHandler().getAllResources()
     else:
         return ResourceHandler().search(request.args)
+@app.route('/ResourceLocator/resource/instock')
+def getAllResourcesInStock():
+#    if not request.args:
+    return ResourceHandler().getAllResourcesInStock()
+#    else:
+#        return ResourceHandler().getResourceInStockByName(request.args)
+
+@app.route('/ResourceLocator/resource/instock/<string:name>')
+def getResourceInStockByName(name):
+    return ResourceHandler().getResourceInStockByName(name)
+
 
 @app.route('/ResourceLocator/resource/<int:Rid>')
 def getResourceByRid(Rid):

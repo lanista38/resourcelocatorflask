@@ -17,6 +17,24 @@ class ResourceDAO:
         for row in cursor:
             result.append(row)
         return result
+        #operation 8 --> resources Available
+    def getAllResourcesInStock(self):
+        cursor = self.conn.cursor()
+        query = "select * from resource where rstock > 0;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getResourceInStockByName(self, rname):
+        cursor = self.conn.cursor()
+        query = "select * from resource where rstock > 0 and rname ilike %(like)s;"
+        cursor.execute(query, dict(like= '%'+rname+'%'))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
     def getResourceByRid(self, Rid):
         cursor = self.conn.cursor()

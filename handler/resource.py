@@ -30,6 +30,25 @@ class ResourceHandler:
             result_list.append(result)
         return jsonify(Resources=result_list)
 
+        #operation 8 --> Resources Available
+    def getAllResourcesInStock(self):
+            dao = ResourceDAO()
+            parts_list = dao.getAllResourcesInStock()
+            result_list = []
+            for row in parts_list:
+                result = self.build_resource_dict(row)
+                result_list.append(result)
+            return jsonify(Resource=result_list)
+    def getResourceInStockByName(self, rname):
+            dao = ResourceDAO()
+            #name = args.get("rname")
+            parts_list = dao.getResourceInStockByName(rname)
+            result_list = []
+            for row in parts_list:
+                result = self.build_resource_dict(row)
+                result_list.append(result)
+            return jsonify(Resource=result_list)
+
     def getResourceByRid(self, Rid):
         dao = ResourceDAO()
         row = dao.getResourceByRid(Rid)
@@ -84,7 +103,9 @@ class ResourceHandler:
             result_list.append(result)
         return jsonify(Resource=result_list)
 
-# To-Do
+
+
+# To-Do, should also add by name and instock/out of stock
     def search(self, args):
         dao = ResourceDAO()
         price = args.get("price")
