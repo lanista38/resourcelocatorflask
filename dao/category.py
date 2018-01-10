@@ -17,41 +17,9 @@ class CategoryDAO:
         for row in cursor:
             result.append(row)
         return result
-
-    #Operations 7 & 8 from email
-    def getAllCategoryByRequest(self):
+    def getCategoryByCid(self, Cid):
         cursor = self.conn.cursor()
-        query = "select * from Category natural inner join Request;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
-
-    def getAllCategoryByAvailability(self):
-        cursor = self.conn.cursor()
-        query = "select * from Category natural inner join Announcement;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
-
-    #Operations 9 & 10 from email
-    def getCategoryByKeywordRequest(self,Cname):
-        cursor = self.conn.cursor()
-        query = "select * from Category where Cname = %s from Category natural inner join Request;"
-        cursor.execute(query,(Cname,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
-
-    def getCategoryByKeyWordAvailability(self,Cname):
-        cursor = self.conn.cursor()
-        query = "select * from Category where Cname = %s from Category natural inner join Announcement;"
-        cursor.execute(query,(Cname,))
-        result = []
-        for row in cursor:
-            result.append(row)
+        query = "select * from Category where Cid=%s;"
+        cursor.execute(query, (Cid,))
+        result = cursor.fetchone()
         return result

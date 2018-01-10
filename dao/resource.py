@@ -24,39 +24,48 @@ class ResourceDAO:
         result = cursor.fetchone()
         return result
 
-    def getResourceByCid(self, cid):
+    def getAllResourcesByCategoryId(self, Cid):
         cursor = self.conn.cursor()
-        query = "select * from Resource where Cid = %s;"
-        cursor.execute(query, (cid,))
+        query = "select * from Resource where Cid=%s;"
+        cursor.execute(query, (Cid,))
         result = []
         for row in cursor:
             result.append(row)
         return result
-
-    def getResourceByCategoryName(self, Cname):
-
+    def getAllResourcesByCategoryName(self, Cname):
         cursor = self.conn.cursor()
-        query = "select * from Resource where Cname = %s;"
-        cursor.execute(query, (cid,))
+        query = "select * from Resource natural inner join Category where Cname=%s;"
+        cursor.execute(query, (Cname,))
         result = []
         for row in cursor:
             result.append(row)
         return result
 
     #Operation 14
-    def getResourceBySupplier(self,Pid):
+    def getResourceBySupplier(self,Sid):
         cursor = self.conn.cursor()
-        query = "select * from Resource natural inner join Supplier where Pid = %s;"
+        query = "select * from Resource natural inner join Supplier where Sid = %s;"
         cursor.execute(query,(Pid,))
         result = []
         for row in cursor:
             result.append(row)
         return result
 
+    # To-Do
     #Operation 16
     def getResourceByRegion(self,Rid,Rregion):
         cursor = self.conn.cursor()
         query ="select * from Resource natural inner join Announcement where Rid = %s and Rregion = %s;"
+        cursor.execute(query,(Rid,Rregion))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    # To-Do
+    def geAllResourcesByRegion(self,Rregion):
+        cursor = self.conn.cursor()
+        query ="select * from Resource natural inner join Announcement where Rregion = %s;"
         cursor.execute(query,(Rid,Rregion))
         result = []
         for row in cursor:

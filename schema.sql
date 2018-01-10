@@ -20,5 +20,5 @@ create table ResourceRequest(Rid integer references Resource(Rid), Cuid integer 
 create table ResourceRequest(Cuid serial primary key references Customer(Cuid), Rid serial primary key references Resource(Rid), RRqty integer, RRDate date);
 create table Reserve(Cuid serial primary key references Customer(Cuid), Rid serial primary key references Resource(Rid), RDate date, Rqty integer);
 create table Announcement(Sid serial primary key references Supplier(Sid), Rid serial primary key references Resource(Rid), ADate date, APqty integer);
-create table Purchase(Cuid serial primary key references Customer(Cuid), Rid serial primary key references Resource(Rid), Pdate varchar(20), Pprice varchar(20), Pqty integer);
+create table Purchase(Pid primary key, Cuid serial  references Customer(Cuid), Rid serial references Resource(Rid), Pdate varchar(20), Pprice varchar(20), Pqty integer);
 create table isSubCategory(Cid serial primary key, Cname varchar(20));

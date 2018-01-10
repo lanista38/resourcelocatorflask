@@ -37,3 +37,13 @@ class RequestHandler:
             result = self.build_request_dict(row)
             result_list.append(result)
         return jsonify(Requests=result_list)
+
+    #to-do
+    def getRequestByTown(self, town):
+        dao = ResourceDAO()
+        request_list = dao.getRequestByResource(Rname)
+        result_list = []
+        for row in request_list:
+            result = self.build_request_dict(row)
+            result_list.append(result)
+        return jsonify(Requests=result_list)
