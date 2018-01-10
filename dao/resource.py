@@ -1,5 +1,5 @@
 from config.dbconfig import pg_config
-#final
+
 import psycopg2
 
 class ResourceDAO:
@@ -11,7 +11,8 @@ class ResourceDAO:
 
     def getAllResources(self):
         cursor = self.conn.cursor()
-        query = "select * from Resource;"
+        query = "select * from resource;"
+        cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
@@ -19,54 +20,72 @@ class ResourceDAO:
 
     def getResourceByRid(self, Rid):
         cursor = self.conn.cursor()
-        query = "select * from Resource where Rid = %s;"
-        cursor.execute(query, (Rid,))
+        query = "select * from resource where rid = %s;"
+        cursor.execute(query,[Rid])
         result = cursor.fetchone()
         return result
 
-    def getAllResourcesByCategoryId(self, Cid):
+    def getResourceByRname(self, Rname):
         cursor = self.conn.cursor()
-        query = "select * from Resource where Cid=%s;"
-        cursor.execute(query, (Cid,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
-    def getAllResourcesByCategoryName(self, Cname):
-        cursor = self.conn.cursor()
-        query = "select * from Resource natural inner join Category where Cname=%s;"
-        cursor.execute(query, (Cname,))
+        query = "select * from resource where rname ilike %(like)s;"
+        cursor.execute(query,dict(like= '%'+Rname+'%'))
         result = []
         for row in cursor:
             result.append(row)
         return result
 
     #Operation 14
-    def getResourceBySupplier(self,Sid):
+    def getResourceBySupplier(self,Rid,Sid):
         cursor = self.conn.cursor()
-        query = "select * from Resource natural inner join Supplier where Sid = %s;"
-        cursor.execute(query,(Pid,))
+        query = "select r.rid,r.rname,rt.stock,t.tname from town t natural join res_tow_sup rt natural join resource r natural join supplier s where (r.rid=%s or r.rname=%s) and s.sid=%s;"
+        cursor.execute(query,(Rid,Rid,Sid))
         result = []
         for row in cursor:
             result.append(row)
         return result
 
-    # To-Do
+    def getResourceByCid(self, cid):
+        cursor = self.conn.cursor()
+        query = "select * from resource where cid = %s;"
+        cursor.execute(query,[cid])
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getResourceByPrice(self, rprice):
+        cursor = self.conn.cursor()
+        query = "select * from resource where rprice = %s;"
+        cursor.execute(query,[rprice])
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getResourceByPriceCid(self, rprice,cid):
+        cursor = self.conn.cursor()
+        query = "select * from resource where rprice = %s and cid = %s;"
+        cursor.execute(query,[rprice,cid])
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getResourceByCategoryName(self, Cname):
+        cursor = self.conn.cursor()
+        query = "select r.* from resource r natural join category c where c.cname ilike %(like)s;"
+        cursor.execute(query,dict(like='%'+Cname+'%'))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+
     #Operation 16
-    def getResourceByRegion(self,Rid,Rregion):
+    def getResourceByIdRegion(self,Rid,Tid):
         cursor = self.conn.cursor()
-        query ="select * from Resource natural inner join Announcement where Rid = %s and Rregion = %s;"
-        cursor.execute(query,(Rid,Rregion))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
-
-    # To-Do
-    def geAllResourcesByRegion(self,Rregion):
-        cursor = self.conn.cursor()
-        query ="select * from Resource natural inner join Announcement where Rregion = %s;"
-        cursor.execute(query,(Rid,Rregion))
+        query = "select * from resource r natural join res_tow_sup rts where r.rid=%s and rts.tid=%s;"
+        cursor.execute(query,[Rid,Tid])
         result = []
         for row in cursor:
             result.append(row)
