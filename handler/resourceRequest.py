@@ -5,12 +5,11 @@ class RequestHandler:
     #Dictionary to be revised
     def build_request_dict(self):
         result = {}
-        result['Cid'] = row[0]
-        result['Rid'] = row[1]
-        result['RRqty'] = row[2]
-        result['RRdate'] = row[3]
+        result['cid'] = row[0]
+        result['rid'] = row[1]
+        result['rrqty'] = row[2]
+        result['rrdate'] = row[3]
         result['tid'] = row[4]
-        result['sid'] = row[5]
         return result
 
     def getAllRequests(self):

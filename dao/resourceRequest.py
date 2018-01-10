@@ -26,7 +26,7 @@ class ResourceRequestDAO:
 
     def getRequestByResource(self, rname):
         cursor = self.conn.cursor()
-        query = "select * from Request natural inner join where rname = %s;"
+        query = "select * from request natural inner join resource where rname = %s;"
         cursor.execute(query, (rname,))
         result = []
         for row in cursor:

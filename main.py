@@ -95,6 +95,7 @@ def getAllAnnouncements():
 
 
 #SEARCH endpoints
+#9.Operation Keyword search resources being requested, with sorting by resource name
 @app.route('/ResourceLocator/SearchRequests/Resource/<string:Rname>')
 def searchRequests(Rname):
     return RequestHandler().getRequestByResource(Rname)
@@ -102,6 +103,16 @@ def searchRequests(Rname):
 @app.route('/ResourceLocator/SearchAnnounce/Resource/<string:Rname>')
 def searchAnnouncements(Rname):
     return AnnouncementHandler().getAnnouncementByResource(Rname)
+#7 Operation Browse resources being requested
+@app.route('/ResourceLocator/SearchAllRequests/')
+def searchRequestsAll():
+        return RequestHandler().getAllRequests()
+#Operation 15. Encontrar suplidores para un producto dado (e.g., diesel)
+@app.route('/ResourceLocator/SearchSupplierByProduct/<string:rname')
+def searchSuppliersByResource(rname):
+    return SupplierHandler().getSuppliersByResourceName(rname)
+
+
 
 #DASHBOARD endpoints
 @app.route('/ResourceLocator/ShowDashRequests/days/<int:days>/Region/<string:Region>')
