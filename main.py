@@ -97,11 +97,16 @@ def postRequest(Rname):
 def postAnnouncement(Rname):
     return AnnouncementHandler().AnnounceResource(Rname)
 
-@app.route('/ResourceLocator/BrowseAnnouncements/')
+@app.route('/ResourceLocator/Announcements/')
 def getAllAnnouncements():
     return AnnouncementHandler().getAllAnnouncements()
 
-
+@app.route('/ResourceLocator/Announcements/<string:Sname>')
+def getAnnouncementsBySupplierName(Sname):
+    return AnnouncementHandler().getAnnouncementBySname(Sname)
+@app.route('/ResourceLocator/Announcements/<int:Sid>')
+def getAnnouncementsBySupplierId(Sid):
+    return AnnouncementHandler().getAnnouncementBySid(Sid)
 
 
 #SEARCH endpoints
@@ -120,7 +125,7 @@ def searchRequestsAll():
 #Operation 15. Encontrar suplidores para un producto dado (e.g., diesel)
 @app.route('/ResourceLocator/SearchSupplierByProduct/<string:rname>')
 def searchSuppliersByResource(rname):
-    return SupplierHandler().getSuppliersByResourceID(rname)
+    return SupplierHandler().getSuppliersByResourceName(rname)
 
 
 

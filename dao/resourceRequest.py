@@ -6,10 +6,12 @@ class ResourceRequestDAO:
         connection_url = "host=%s dbname=%s user=%s password=%s" % (pg_config['hostname'], pg_config['dbname'],
                                                             pg_config['user'],
                                                             pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
 # Operation 7
     def getAllRequests(self):
         cursor = self.conn.cursor()
         query = "select * from Request"
+        cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
