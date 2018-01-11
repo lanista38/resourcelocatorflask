@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 from handler.resource import ResourceHandler
 from handler.supplier import SupplierHandler
 from handler.resourceRequest import RequestHandler
-from handler.purchaseReserve import PurchaseHandler
+from handler.purchase import PurchaseHandler
 from handler.registration import RegistrationHandler
 from handler.dashboard import DashboardHandler
 from handler.announcement import AnnouncementHandler
@@ -52,18 +52,28 @@ def getRequestByRPId(Rid):
 
 #Reserve/Purchase routes
 
-@app.route('/ResourceLocator/purchases')
+@app.route('/ResourceLocator/purchase')
 def getAllPurchases():
-    return PurchaseHandler().getAllPurchases()
+    if not request.args:
+        return PurchaseHandler().getAllPurchases()
+    else:
+        return ResourceHandler().search(request.args)
 
-@app.route('/ResourceLocator/purchases/<int:Rid>')
-def getPurchaseByRid(Rid):
-    return PurchaseHandler().getPurchaseByRid(Rid)
+@app.route('/ResourceLocator/purchase/<int:Pid>')
+def getPurchaseByRid(Pid):
+    return PurchaseHandler().getPurchaseByRid(Pid)
 
-@app.route('/ResourceLocator/purchases/<int:RPid>')
-def getPurchaseByRPid(RPid):
-    return PurchaseHandler().getPurchaseByRPid(RPid)
+@app.route('/ResourceLocator/purchase/resource/<int:Rid>')
+def getPurchaseByResource(Rid):
+    return PurchaseHandler().getPurchaseByResource(Rid)
 
+@app.route('/ResourceLocator/purchase/supplier/<int:Sid>')
+def getPurchaseBySupplier(Sid):
+    return PurchaseHandler().getPurchaseBySupplier(Sid)
+
+@app.route('/ResourceLocator/purchase/customer/<int:Cid>')
+def getPurchaseByCustomer(Cid):
+    return PurchaseHandler().getPurchaseByCustomer(Cid)
 
 # Register endpoints
 @app.route('/ResourceLocator/registerAdmin')
@@ -108,7 +118,7 @@ def searchAnnouncements(Rname):
 def searchRequestsAll():
         return RequestHandler().getAllRequests()
 #Operation 15. Encontrar suplidores para un producto dado (e.g., diesel)
-@app.route('/ResourceLocator/SearchSupplierByProduct/<string:rname')
+@app.route('/ResourceLocator/SearchSupplierByProduct/<string:rname>')
 def searchSuppliersByResource(rname):
     return SupplierHandler().getSuppliersByResourceID(rname)
 
