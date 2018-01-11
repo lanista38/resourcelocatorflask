@@ -87,11 +87,16 @@ def postRequest(Rname):
 def postAnnouncement(Rname):
     return AnnouncementHandler().AnnounceResource(Rname)
 
-@app.route('/ResourceLocator/BrowseAnnouncements/')
+@app.route('/ResourceLocator/Announcements/')
 def getAllAnnouncements():
     return AnnouncementHandler().getAllAnnouncements()
 
-
+@app.route('/ResourceLocator/Announcements/<string:Sname>')
+def getAnnouncementsBySupplierName(Sname):
+    return AnnouncementHandler().getAnnouncementBySname(Sname)
+@app.route('/ResourceLocator/Announcements/<int:Sid>')
+def getAnnouncementsBySupplierId(Sid):
+    return AnnouncementHandler().getAnnouncementBySid(Sid)
 
 
 #SEARCH endpoints
