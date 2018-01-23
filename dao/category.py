@@ -11,9 +11,15 @@ class CategoryDAO:
 
     def getAllCategories(self):
         cursor = self.conn.cursor()
-        query = 'select * from flask_schema.category;'
+        query = "select * from Category;"
         cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
+        return result
+    def getCategoryByCid(self, Cid):
+        cursor = self.conn.cursor()
+        query = "select * from Category where Cid=%s;"
+        cursor.execute(query, (Cid,))
+        result = cursor.fetchone()
         return result

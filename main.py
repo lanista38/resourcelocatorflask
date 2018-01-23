@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 from handler.resource import ResourceHandler
 from handler.supplier import SupplierHandler
 from handler.resourceRequest import RequestHandler
-from handler.purchaseReserve import PurchaseHandler
+from handler.purchase import PurchaseHandler
 from handler.registration import RegistrationHandler
 from handler.dashboard import DashboardHandler
 from handler.announcement import AnnouncementHandler
@@ -32,6 +32,9 @@ def getAllSuppliers():
 def getSupplierById(sid):
     return SupplierHandler().getSupplierById(sid)
 
+@app.route('/ResourceLocator/suppliers/<string:company>/town/<string:tname>')
+def getSuppliersByTownAndCompany(tname, company):
+    return SupplierHandler().searchSuppliers(tname, company)
 
 # Resource Requests routes
 @app.route('/ResourceLocator/BrowseRequests/')
@@ -49,18 +52,28 @@ def getRequestByRPId(Rid):
 
 #Reserve/Purchase routes
 
-@app.route('/ResourceLocator/purchases')
+@app.route('/ResourceLocator/purchase')
 def getAllPurchases():
-    return PurchaseHandler().getAllPurchases()
+    if not request.args:
+        return PurchaseHandler().getAllPurchases()
+    else:
+        return ResourceHandler().search(request.args)
 
-@app.route('/ResourceLocator/purchases/<int:Rid>')
-def getPurchaseByRid(Rid):
-    return PurchaseHandler().getPurchaseByRid(Rid)
+@app.route('/ResourceLocator/purchase/<int:Pid>')
+def getPurchaseByRid(Pid):
+    return PurchaseHandler().getPurchaseByRid(Pid)
 
-@app.route('/ResourceLocator/purchases/<int:RPid>')
-def getPurchaseByRPid(RPid):
-    return PurchaseHandler().getPurchaseByRPid(RPid)
+@app.route('/ResourceLocator/purchase/resource/<int:Rid>')
+def getPurchaseByResource(Rid):
+    return PurchaseHandler().getPurchaseByResource(Rid)
 
+@app.route('/ResourceLocator/purchase/supplier/<int:Sid>')
+def getPurchaseBySupplier(Sid):
+    return PurchaseHandler().getPurchaseBySupplier(Sid)
+
+@app.route('/ResourceLocator/purchase/customer/<int:Cid>')
+def getPurchaseByCustomer(Cid):
+    return PurchaseHandler().getPurchaseByCustomer(Cid)
 
 # Register endpoints
 @app.route('/ResourceLocator/registerAdmin')
@@ -84,14 +97,20 @@ def postRequest(Rname):
 def postAnnouncement(Rname):
     return AnnouncementHandler().AnnounceResource(Rname)
 
-@app.route('/ResourceLocator/BrowseAnnouncements/')
+@app.route('/ResourceLocator/Announcements/')
 def getAllAnnouncements():
     return AnnouncementHandler().getAllAnnouncements()
 
-
+@app.route('/ResourceLocator/Announcements/<string:Sname>')
+def getAnnouncementsBySupplierName(Sname):
+    return AnnouncementHandler().getAnnouncementBySname(Sname)
+@app.route('/ResourceLocator/Announcements/<int:Sid>')
+def getAnnouncementsBySupplierId(Sid):
+    return AnnouncementHandler().getAnnouncementBySid(Sid)
 
 
 #SEARCH endpoints
+#9.Operation Keyword search resources being requested, with sorting by resource name
 @app.route('/ResourceLocator/SearchRequests/Resource/<string:Rname>')
 def searchRequests(Rname):
     return RequestHandler().getRequestByResource(Rname)
@@ -99,6 +118,16 @@ def searchRequests(Rname):
 @app.route('/ResourceLocator/SearchAnnounce/Resource/<string:Rname>')
 def searchAnnouncements(Rname):
     return AnnouncementHandler().getAnnouncementByResource(Rname)
+#7 Operation Browse resources being requested
+@app.route('/ResourceLocator/SearchAllRequests/')
+def searchRequestsAll():
+        return RequestHandler().getAllRequests()
+#Operation 15. Encontrar suplidores para un producto dado (e.g., diesel)
+@app.route('/ResourceLocator/SearchSupplierByProduct/<string:rname>')
+def searchSuppliersByResource(rname):
+    return SupplierHandler().getSuppliersByResourceName(rname)
+
+
 
 #DASHBOARD endpoints
 @app.route('/ResourceLocator/ShowDashRequests/days/<int:days>/Region/<string:Region>')
@@ -129,21 +158,65 @@ def getCategoryByCName(name):
     return CategoryHandler().getCategoryByCname(name)
 
 #Resource routes
-
-@app.route('/ResourceLocator/resource')
+@app.route('/ResourceLocator/resource', methods=['GET', 'POST'])
 def getAllResources():
-    if not request.args:
-        return ResourceHandler().getAllResources()
-    else:
-        return ResourceHandler().search(request.args)
 
-@app.route('/ResourceLocator/resource/<int:Rid>')
-def getResourceByRid(Rid):
-    return ResourceHandler().getResourceByRid(Rid)
+    if request.method == 'POST':
+        form = {}
+        form['rname'] = request.args.get('rname')
+        form['rstock'] = request.args.get('rstock')
+        form['cid'] = request.args.get('cid')
+        form['rprice'] = request.args.get('rprice')
+        return ResourceHandler().insertResource(form)
+    else:
+        if not request.args:
+            return ResourceHandler().getAllResources()
+        else:
+            return ResourceHandler().search(request.args)
+
+@app.route('/ResourceLocator/resource/instock')
+def getAllResourcesInStock():
+#    if not request.args:
+    return ResourceHandler().getAllResourcesInStock()
+#    else:
+#        return ResourceHandler().getResourceInStockByName(request.args)
+
+@app.route('/ResourceLocator/resource/instock/<string:name>')
+def getResourceInStockByName(name):
+    return ResourceHandler().getResourceInStockByName(name)
+
+
+@app.route('/ResourceLocator/resource/<int:rid>' , methods=['GET', 'PUT', 'DELETE'])
+def getResourceByRid(rid):
+    if request.method == 'GET':
+        return ResourceHandler().getResourceByRid(rid)
+    elif request.method == 'PUT':
+        return ResourceHandler().updateResource(rid, request.form)
+    elif request.method == 'DELETE':
+        return ResourceHandler().deleteResource(rid)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
 
 @app.route('/ResourceLocator/resource/<string:name>')
 def getResourceByName(name):
     return ResourceHandler().getResourceByName(name)
+
+@app.route('/ResourceLocator/resource/category/<int:Rid>')
+def getResourcesByCid(Rid):
+    return ResourceHandler().getResourcesByCid(Rid)
+
+@app.route('/ResourceLocator/resource/category/<string:name>')
+def getResourceByCategoryName(name):
+    return ResourceHandler().getResourceByCategoryName(name)
+
+@app.route('/ResourceLocator/resource/<string:name>/supplier/<int:Sid>')
+def getResourceBySupplier(name,Sid):
+    return ResourceHandler().getResourceBySupplier(name,Sid)
+
+@app.route('/ResourceLocator/resource/<int:rid>/region/<int:tid>')
+def getResourceByIdRegion(rid,tid):
+    return ResourceHandler().getResourceByIdRegion(rid,tid)
 
 
 if __name__ == '__main__':
