@@ -9,6 +9,28 @@ class ResourceDAO:
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
 
+    def insertResource(self, rname, rstock, cid, rprice):
+        cursor = self.conn.cursor()
+        query = "insert into Resource(rname, rstock, cid, rprice) values (%s, %s, %s, %s) returning rid;"
+        cursor.execute(query, (rname, rstock, cid, rprice,))
+        pid = cursor.fetchone()[0]
+        self.conn.commit()
+        return rid
+
+    def deleteResource(self, rid):
+        cursor = self.conn.cursor()
+        query = "delete from Resource where rid = %s;"
+        cursor.execute(query, (pid,))
+        self.conn.commit()
+        return rid
+
+    def updateResource(self, rid, rname, rstock, cid, rprice):
+        cursor = self.conn.cursor()
+        query = "update Resource set rname = %s, rstock = %s, cid = %s, rprice = %s where rid = %s;"
+        cursor.execute(query, (rname, rstock, cid, rprice, rid,))
+        self.conn.commit()
+        return rid
+
     def getAllResources(self):
         cursor = self.conn.cursor()
         query = "select * from resource;"

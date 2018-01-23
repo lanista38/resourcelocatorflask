@@ -47,7 +47,7 @@ class AnnouncementDAO:
         for row in cursor:
             result.append(row)
         return result
-#Operation 8
+#Operation 8 
     def getAllResourcesAnnounced(self):
         cursor = self.conn.cursor()
         query = "select * from Announcement natural inner join Resource;"

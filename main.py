@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 from handler.resource import ResourceHandler
 from handler.supplier import SupplierHandler
 from handler.resourceRequest import RequestHandler
-from handler.purchaseReserve import PurchaseHandler
+from handler.purchase import PurchaseHandler
 from handler.registration import RegistrationHandler
 from handler.dashboard import DashboardHandler
 from handler.announcement import AnnouncementHandler
@@ -52,18 +52,28 @@ def getRequestByRPId(Rid):
 
 #Reserve/Purchase routes
 
-@app.route('/ResourceLocator/purchases')
+@app.route('/ResourceLocator/purchase')
 def getAllPurchases():
-    return PurchaseHandler().getAllPurchases()
+    if not request.args:
+        return PurchaseHandler().getAllPurchases()
+    else:
+        return ResourceHandler().search(request.args)
 
-@app.route('/ResourceLocator/purchases/<int:Rid>')
-def getPurchaseByRid(Rid):
-    return PurchaseHandler().getPurchaseByRid(Rid)
+@app.route('/ResourceLocator/purchase/<int:Pid>')
+def getPurchaseByRid(Pid):
+    return PurchaseHandler().getPurchaseByRid(Pid)
 
-@app.route('/ResourceLocator/purchases/<int:RPid>')
-def getPurchaseByRPid(RPid):
-    return PurchaseHandler().getPurchaseByRPid(RPid)
+@app.route('/ResourceLocator/purchase/resource/<int:Rid>')
+def getPurchaseByResource(Rid):
+    return PurchaseHandler().getPurchaseByResource(Rid)
 
+@app.route('/ResourceLocator/purchase/supplier/<int:Sid>')
+def getPurchaseBySupplier(Sid):
+    return PurchaseHandler().getPurchaseBySupplier(Sid)
+
+@app.route('/ResourceLocator/purchase/customer/<int:Cid>')
+def getPurchaseByCustomer(Cid):
+    return PurchaseHandler().getPurchaseByCustomer(Cid)
 
 # Register endpoints
 @app.route('/ResourceLocator/registerAdmin')
@@ -148,12 +158,16 @@ def getCategoryByCName(name):
     return CategoryHandler().getCategoryByCname(name)
 
 #Resource routes
-@app.route('/ResourceLocator/resource')
+@app.route('/ResourceLocator/resource', methods=['GET', 'POST'])
 def getAllResources():
-    if not request.args:
-        return ResourceHandler().getAllResources()
+    if request.method == 'POST':
+        return ResourceHandler().insertResource(request.form)
     else:
-        return ResourceHandler().search(request.args)
+        if not request.args:
+            return ResourceHandler().getAllResources()
+        else:
+            return ResourceHandler().search(request.args)
+
 @app.route('/ResourceLocator/resource/instock')
 def getAllResourcesInStock():
 #    if not request.args:
@@ -166,9 +180,17 @@ def getResourceInStockByName(name):
     return ResourceHandler().getResourceInStockByName(name)
 
 
-@app.route('/ResourceLocator/resource/<int:Rid>')
-def getResourceByRid(Rid):
-    return ResourceHandler().getResourceByRid(Rid)
+@app.route('/ResourceLocator/resource/<int:rid>' , methods=['GET', 'PUT', 'DELETE'])
+def getResourceByRid(rid):
+    if request.method == 'GET':
+        return ResourceHandler().getResourceByRid(rid)
+    elif request.method == 'PUT':
+        return ResourceHandler().updateResource(rid, request.form)
+    elif request.method == 'DELETE':
+        return ResourceHandler().deleteResource(rid)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
 
 @app.route('/ResourceLocator/resource/<string:name>')
 def getResourceByName(name):
