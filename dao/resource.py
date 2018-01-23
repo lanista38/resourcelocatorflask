@@ -20,7 +20,7 @@ class ResourceDAO:
     def deleteResource(self, rid):
         cursor = self.conn.cursor()
         query = "delete from Resource where rid = %s;"
-        cursor.execute(query, (pid,))
+        cursor.execute(query, (rid,))
         self.conn.commit()
         return rid
 
