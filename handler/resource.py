@@ -13,12 +13,13 @@ class ResourceHandler:
         result['rprice'] = row[4]
         return result
 
-    def build_resource_dict_instert(self, row):
+    def build_resource_dict_instert(self, rid, rname, rstock, cid, rprice):
         result = {}
-        result['Rid'] = row[0]
-        result['Rname'] = row[1]
-        result['rstock'] = row[2]
-        result['rprice'] = row[3]
+        result['Rid'] = rid
+        result['Rname'] = rname
+        result['rstock'] = rstock
+        result['rprice'] = cid
+        result['cid'] = cid
         return result
 
     def insertResource(self, form):
@@ -32,7 +33,7 @@ class ResourceHandler:
             if rname and rprice and rstock and cid:
                 dao = ResourceDAO()
                 rid = dao.insertResource(rname, rstock, cid, rprice)
-                result = self.build_resource_dict(rid, rname, rstock, cid, rprice)
+                result = self.build_resource_dict_instert(rid, rname, rstock, cid, rprice)
                 return jsonify(Resource=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400

@@ -160,8 +160,14 @@ def getCategoryByCName(name):
 #Resource routes
 @app.route('/ResourceLocator/resource', methods=['GET', 'POST'])
 def getAllResources():
+
     if request.method == 'POST':
-        return ResourceHandler().insertResource(request.form)
+        form = {}
+        form['rname'] = request.args.get('rname')
+        form['rstock'] = request.args.get('rstock')
+        form['cid'] = request.args.get('cid')
+        form['rprice'] = request.args.get('rprice')
+        return ResourceHandler().insertResource(form)
     else:
         if not request.args:
             return ResourceHandler().getAllResources()

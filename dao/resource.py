@@ -13,7 +13,7 @@ class ResourceDAO:
         cursor = self.conn.cursor()
         query = "insert into Resource(rname, rstock, cid, rprice) values (%s, %s, %s, %s) returning rid;"
         cursor.execute(query, (rname, rstock, cid, rprice,))
-        pid = cursor.fetchone()[0]
+        rid = cursor.fetchone()[0]
         self.conn.commit()
         return rid
 
