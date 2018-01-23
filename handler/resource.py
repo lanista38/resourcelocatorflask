@@ -12,10 +12,6 @@ class ResourceHandler:
         result['cid'] = row[3]
         result['rprice'] = row[4]
         return result
-
-<<<<<<< HEAD
-
-=======
     def build_resource_dict_instert(self, rid, rname, rstock, cid, rprice):
         result = {}
         result['Rid'] = rid
@@ -62,12 +58,11 @@ class ResourceHandler:
                 rstock = form['rstock']
                 cid = form['cid']
                 if rname and rprice and rstock and cid:
-                    dao.updateResource(rid, pname, pcolor, pmaterial, pprice)
-                    result = self.build_resource_dict(rid, rname, rstock, cid, rprice)
+                    dao.updateResource(rid, rname, rstock, cid, rprice)
+                    result = self.build_resource_dict_instert(rid, rname, rstock, cid, rprice)
                     return jsonify(Resource=result), 200
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
->>>>>>> Phase2(In-Progress)
 
     def getAllResources(self):
         dao = ResourceDAO()
@@ -77,8 +72,6 @@ class ResourceHandler:
             result = self.build_resource_dict(row)
             result_list.append(result)
         return jsonify(Resources=result_list)
-<<<<<<< HEAD
-=======
 
         #operation 8 --> Resources Available
     def getAllResourcesInStock(self):
@@ -98,45 +91,12 @@ class ResourceHandler:
                 result = self.build_resource_dict(row)
                 result_list.append(result)
             return jsonify(Resource=result_list)
->>>>>>> Phase2(In-Progress)
 
     def getResourceByRid(self, Rid):
         dao = ResourceDAO()
         row = dao.getResourceByRid(Rid)
         if not row:
             return jsonify(Error = "Resource Not Found"), 404
-<<<<<<< HEAD
-        else:
-            resource = self.build_resource_dict(row)
-            return jsonify(Resource = resource)
-
-    def getResourceByName(self, Rname):
-        dao = ResourceDAO()
-        resource_list = dao.getResourceByName(Rname)
-        result_list = []
-        for row in resource_list:
-            result = self.build_resource_dict(row)
-            result_list.append(result)
-        return jsonify(Resources=result_list)
-
-    def getResourcesByCategoryId(self, Cid):
-        dao = ResourceDAO()
-        resource_list = dao.getResourceByCid(Cid)
-        result_list = []
-        for row in resource_list:
-            result = self.build_resource_dict(row)
-            result_list.append(result)
-        return jsonify(Resources=result_list)
-
-    def getResourcesByCategoryName(self, Cname):
-        dao = ResourceDAO()
-        resource_list = dao.getAllResources()
-        result_list = []
-        for row in resource_list:
-            result = self.build_resource_dict(row)
-            result_list.append(result)
-        return jsonify(Resources=result_list)
-=======
         result = self.build_resource_dict(row)
         return jsonify(result)
 
@@ -176,7 +136,6 @@ class ResourceHandler:
             result = self.build_resource_dict(row)
             result_list.append(result)
         return jsonify(Resource=result_list)
->>>>>>> Phase2(In-Progress)
 
     def getResourceByIdRegion(self, Rid, Tid):
         dao = ResourceDAO()
@@ -192,10 +151,6 @@ class ResourceHandler:
 # To-Do, should also add by name and instock/out of stock
     def search(self, args):
         dao = ResourceDAO()
-<<<<<<< HEAD
-        resource_list = dao.getResourceByCategoryName(Cname)
-=======
->>>>>>> Phase2(In-Progress)
         price = args.get("price")
         category = args.get("category")
         dao=ResourceDAO()
@@ -209,11 +164,7 @@ class ResourceHandler:
         else:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
-<<<<<<< HEAD
-        result_list=self.build_resource_dict(row)
-=======
         for row in parts_list:
             result = self.build_resource_dict(row)
             result_list.append(result)
->>>>>>> Phase2(In-Progress)
         return jsonify(result_list)

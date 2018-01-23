@@ -191,7 +191,12 @@ def getResourceByRid(rid):
     if request.method == 'GET':
         return ResourceHandler().getResourceByRid(rid)
     elif request.method == 'PUT':
-        return ResourceHandler().updateResource(rid, request.form)
+        form = {}
+        form['rname'] = request.args.get('rname')
+        form['rstock'] = request.args.get('rstock')
+        form['cid'] = request.args.get('cid')
+        form['rprice'] = request.args.get('rprice')
+        return ResourceHandler().updateResource(rid, form)
     elif request.method == 'DELETE':
         return ResourceHandler().deleteResource(rid)
     else:

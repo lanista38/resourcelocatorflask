@@ -32,11 +32,7 @@ class CategoryHandler:
         dao = CategoryDAO()
         category_list = dao.getAllCategories()
         result_list = []
-<<<<<<< HEAD
-        for row in parts_list:
-=======
         for row in category_list:
->>>>>>> Phase2(In-Progress)
             result = self.build_category_dict(row)
             result_list.append(result)
         return jsonify(Parts=result_list)
