@@ -76,6 +76,20 @@ def getAllPurchases():
     else:
         return ResourceHandler().search(request.args)
 
+@app.route('/ResourceLocator/purchase', methods=['GET', 'POST'])
+def getAllPurchases():
+    if request.method == 'POST':
+        form = {}
+        form['pqty'] = request.args.get('pqty')
+        form['pprice'] = request.args.get('pprice')
+        form['cid'] = request.args.get('cid')
+        form['rid'] = request.args.get('rid')
+        form['sid'] = request.args.get('sid')
+        return PurchaseHandler().insertPurchase(form)
+    else:
+        if not request.args:
+            return PurchaseHandler().getAllPurchases()
+
 @app.route('/ResourceLocator/purchase/<int:Pid>')
 def getPurchaseByRid(Pid):
     return PurchaseHandler().getPurchaseByRid(Pid)
