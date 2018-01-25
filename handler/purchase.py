@@ -15,6 +15,33 @@ class PurchaseHandler:
         result['sid'] = row[6]
         return result
 
+    def build_purchase_dict_insert(self, pid, pdate, pqty, pprice, cid, rid, sid):
+        result = {}
+        result['pid'] = pid
+        result['pqty'] = pqty
+        result['pprice'] = pprice
+        result['cid'] = cid
+        result['rid'] = rid
+        result['sid'] = sid
+        return result
+
+    def insertPurchase(self, form):
+        if len(form) != 5:
+            return jsonify(Error = "Bad post request "), 400
+        else:
+            pqty = form['pqty']
+            pprice = form['pprice']
+            cid = form['cid']
+            rid = form['rid']
+            sid = form['sid']
+            if pqty and pprice and cid and rid and sid:
+                dao = ResourceRequestDAO()
+                pid = dao.insertRequest( pqty, pprice, cid, rid, sid)
+                result = self.build_purchase_dict_insert(pid, pqty, pprice, cid, rid, sid)
+                return jsonify(Request=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
     def getAllPurchases(self):
         dao = PurchaseDAO()
         purchase_list = dao.getAllPurchases()
