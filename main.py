@@ -69,13 +69,6 @@ def getRequestByRPId(Rid):
 
 #Reserve/Purchase routes
 
-@app.route('/ResourceLocator/purchase')
-def getAllPurchases():
-    if not request.args:
-        return PurchaseHandler().getAllPurchases()
-    else:
-        return ResourceHandler().search(request.args)
-
 @app.route('/ResourceLocator/purchase', methods=['GET', 'POST'])
 def getAllPurchases():
     if request.method == 'POST':

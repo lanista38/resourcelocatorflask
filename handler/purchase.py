@@ -15,7 +15,7 @@ class PurchaseHandler:
         result['sid'] = row[6]
         return result
 
-    def build_purchase_dict_insert(self, pid, pdate, pqty, pprice, cid, rid, sid):
+    def build_purchase_dict_insert(self, pid, pqty, pprice, cid, rid, sid):
         result = {}
         result['pid'] = pid
         result['pqty'] = pqty
@@ -35,8 +35,8 @@ class PurchaseHandler:
             rid = form['rid']
             sid = form['sid']
             if pqty and pprice and cid and rid and sid:
-                dao = ResourceRequestDAO()
-                pid = dao.insertRequest( pqty, pprice, cid, rid, sid)
+                dao = PurchaseDAO()
+                pid = dao.insertPurchase( pqty, pprice, cid, rid, sid)
                 result = self.build_purchase_dict_insert(pid, pqty, pprice, cid, rid, sid)
                 return jsonify(Request=result), 201
             else:

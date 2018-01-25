@@ -63,8 +63,8 @@ class PurchaseDAO:
 
     def insertPurchase(self, pqty, pprice, cid, rid, sid):
         cursor = self.conn.cursor()
-        query = "insert into purchase(pqty, pprice, cid, rid, sid) values(%s,%s,%s,%s,%s,%s) returning pid;"
-        cursory.execute(query,(pqty, pprice, cid, rid, sid))
+        query = "insert into purchase(pqty, pprice, cid, rid, sid) values(%s,%s,%s,%s,%s) returning pid;"
+        cursor.execute(query,(pqty, pprice, cid, rid, sid))
         pid = cursor.fetchone()[0]
         self.conn.commit()
         return pid
