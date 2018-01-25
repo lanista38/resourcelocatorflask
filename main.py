@@ -7,7 +7,7 @@ from handler.purchase import PurchaseHandler
 from handler.registration import RegistrationHandler
 from handler.dashboard import DashboardHandler
 from handler.announcement import AnnouncementHandler
-
+from handler.reserve import ReserveHandler
 from handler.category import CategoryHandler
 
 
@@ -98,6 +98,19 @@ def getPurchaseBySupplier(Sid):
 @app.route('/ResourceLocator/purchase/customer/<int:Cid>')
 def getPurchaseByCustomer(Cid):
     return PurchaseHandler().getPurchaseByCustomer(Cid)
+
+@app.route('/ResourceLocator/reserve/', methods=['GET', 'POST'])
+def getAllReservations():
+    if request.method == 'POST':
+        form = {}
+        form['rsqty'] = request.args.get('rsqty')
+        form['cid'] = request.args.get('cid')
+        form['rid'] = request.args.get('rid')
+        form['sid'] = request.args.get('sid')
+        form['tid'] = request.args.get('tid')
+        return ReserveHandler().reserveResource(form)
+    else:
+        return ReserveHandler().getAllReserve()
 
 # Register endpoints
 @app.route('/ResourceLocator/registerAdmin')
