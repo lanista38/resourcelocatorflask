@@ -26,6 +26,66 @@ class AnnouncementHandler:
         result["lastname"] = row[8]
         return result
 
+    def build_announcement_dict_insert(self, aid, sid, rid, aqty, aprice, tid):
+        result = {}
+        result["aid"] = aid
+        result["aqty"] = aqty
+        result["aprice"] = aprice
+        result["tid"] = tid
+        result["rid"] = rid
+        result["sid"] = sid
+        return result
+    def build_announcement_dict_update(self, aid, aqty, aprice, tid):
+        result = {}
+        result["aid"] = aid
+        result["aqty"] = aqty
+        result["aprice"] = aprice
+        result["tid"] = tid
+        return result
+
+    def insertAnnouncement(self, form):
+        if len(form) != 5:
+            return jsonify(Error = "Bad post request "), 400
+        else:
+            sid = form['sid']
+            rid = form['rid']
+            aqty = form['aqty']
+            aprice = form['aprice']
+            tid = form['tid']
+            if sid and rid and aqty and aprice and tid:
+                dao = AnnouncementDAO()
+                aid = dao.insertAnnouncement(sid, rid, aqty, aprice, tid)
+                result = self.build_announcement_dict_insert(aid, sid, rid, aqty, aprice, tid)
+                return jsonify(Announcement=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+    def deleteAnnouncement(self, aid):
+        dao = AnnouncementDAO()
+        if not dao.getAnnouncementByAid(aid):
+            return jsonify(Error = "Part not found."), 404
+        else:
+            dao.deleteAnnouncement(aid)
+            return jsonify(DeleteStatus = "OK"), 200
+
+    def updateAnnouncement(self, aid, form):
+        dao = AnnouncementDAO()
+        if not dao.getAnnouncementByAid(aid):
+            return jsonify(Error = "Part not found."), 404
+        else:
+            if len(form) != 3:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                aqty = form['aqty']
+                aprice = form['aprice']
+                tid = form['tid']
+                if rname and rprice and rstock and cid:
+                    dao.updateResource(aqty, aprice, tid)
+                    result = self.build_announcement_dict_update(aid, aqty, aprice, tid)
+                    return jsonify(Announcement=result), 200
+                else:
+                    return jsonify(Error="Unexpected attributes in update request"), 400
+
     def getAllAnnouncements(self):
         dao = AnnouncementDAO()
         announcement_list = dao.getAllAnnouncements()

@@ -37,13 +37,30 @@ def getSuppliersByTownAndCompany(tname, company):
     return SupplierHandler().searchSuppliers(tname, company)
 
 # Resource Requests routes
-@app.route('/ResourceLocator/BrowseRequests/')
+@app.route('/ResourceLocator/BrowseRequests/', methods=['GET', 'POST'])
 def getAllRequests():
-    return RequestHandler().getAllRequests()
+        if request.method == 'POST':
+            form = {}
+            form['cid'] = request.args.get('cid')
+            form['rid'] = request.args.get('rid')
+            form['rrqty'] = request.args.get('rrqty')
+            form['tid'] = request.args.get('tid')
+            return RequestHandler().insertRequest(form)
+        else:
+            if not request.args:
+                return RequestHandler().getAllRequests()
 
-@app.route('/ResourceLocator/requests/<int:Rid>')
-def getRequestById(Rid):
-    return RequestHandler().getRequestByRid(Rid)
+@app.route('/ResourceLocator/requests/<int:rid>', methods=['GET', 'PUT', 'DELETE'])
+def getRequestById(rid):
+    if request.method == 'GET':
+        return RequestHandler().getRequestByRid(Rid)
+    elif request.method == 'PUT':
+        form = {}
+        form['rrqty'] = request.args.get('rrqty')
+        form['tid'] = request.args.get('tid')
+        return RequestHandler().updateRequest(rid, form)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 @app.route('/ResourceLocator/requests/<int:RPid>')
 def getRequestByRPId(Rid):
@@ -97,9 +114,18 @@ def postRequest(Rname):
 def postAnnouncement(Rname):
     return AnnouncementHandler().AnnounceResource(Rname)
 
-@app.route('/ResourceLocator/Announcements/')
+@app.route('/ResourceLocator/Announcements/' , methods=['GET', 'POST'])
 def getAllAnnouncements():
-    return AnnouncementHandler().getAllAnnouncements()
+    if request.method == 'POST':
+        form = {}
+        form['sid'] = request.args.get('sid')
+        form['rid'] = request.args.get('rid')
+        form['aprice'] = request.args.get('aprice')
+        form['aqty'] = request.args.get('aqty')
+        form['tid'] = request.args.get('tid')
+        return AnnouncementHandler().insertAnnouncement(form)
+    else:
+        return AnnouncementHandler().getAllAnnouncements()
 
 @app.route('/ResourceLocator/Announcements/<string:Sname>')
 def getAnnouncementsBySupplierName(Sname):
@@ -189,7 +215,7 @@ def getResourceInStockByName(name):
 @app.route('/ResourceLocator/resource/<int:rid>' , methods=['GET', 'PUT', 'DELETE'])
 def getResourceByRid(rid):
     if request.method == 'GET':
-        return ResourceHandler().getResourceByRid(rid)
+        return ResourceHandler().getRequestByRid(rid)
     elif request.method == 'PUT':
         form = {}
         form['rname'] = request.args.get('rname')
