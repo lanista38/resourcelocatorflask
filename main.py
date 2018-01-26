@@ -41,11 +41,7 @@ def getSuppliersByTownAndCompany(tname, company):
 def getAllRequests():
         if request.method == 'POST':
             form = {}
-            form['cid'] = request.args.get('cid')
-            form['rid'] = request.args.get('rid')
-            form['rrqty'] = request.args.get('rrqty')
-            form['tid'] = request.args.get('tid')
-            return RequestHandler().insertRequest(form)
+            return RequestHandler().insertRequest(form.json)
         else:
             if not request.args:
                 return RequestHandler().getAllRequests()
@@ -55,10 +51,7 @@ def getRequestById(rid):
     if request.method == 'GET':
         return RequestHandler().getRequestByRid(Rid)
     elif request.method == 'PUT':
-        form = {}
-        form['rrqty'] = request.args.get('rrqty')
-        form['tid'] = request.args.get('tid')
-        return RequestHandler().updateRequest(rid, form)
+        return RequestHandler().updateRequest(rid, form.json)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -72,13 +65,7 @@ def getRequestByRPId(Rid):
 @app.route('/ResourceLocator/purchase', methods=['GET', 'POST'])
 def getAllPurchases():
     if request.method == 'POST':
-        form = {}
-        form['pqty'] = request.args.get('pqty')
-        form['pprice'] = request.args.get('pprice')
-        form['cid'] = request.args.get('cid')
-        form['rid'] = request.args.get('rid')
-        form['sid'] = request.args.get('sid')
-        return PurchaseHandler().insertPurchase(form)
+        return PurchaseHandler().insertPurchase(form.json)
     else:
         if not request.args:
             return PurchaseHandler().getAllPurchases()
@@ -102,13 +89,7 @@ def getPurchaseByCustomer(Cid):
 @app.route('/ResourceLocator/reserve/', methods=['GET', 'POST'])
 def getAllReservations():
     if request.method == 'POST':
-        form = {}
-        form['rsqty'] = request.args.get('rsqty')
-        form['cid'] = request.args.get('cid')
-        form['rid'] = request.args.get('rid')
-        form['sid'] = request.args.get('sid')
-        form['tid'] = request.args.get('tid')
-        return ReserveHandler().reserveResource(form)
+        return ReserveHandler().reserveResource(form.json)
     else:
         return ReserveHandler().getAllReserve()
 
@@ -137,13 +118,7 @@ def postAnnouncement(Rname):
 @app.route('/ResourceLocator/Announcements/' , methods=['GET', 'POST'])
 def getAllAnnouncements():
     if request.method == 'POST':
-        form = {}
-        form['sid'] = request.args.get('sid')
-        form['rid'] = request.args.get('rid')
-        form['aprice'] = request.args.get('aprice')
-        form['aqty'] = request.args.get('aqty')
-        form['tid'] = request.args.get('tid')
-        return AnnouncementHandler().insertAnnouncement(form)
+        return AnnouncementHandler().insertAnnouncement(form.json)
     else:
         return AnnouncementHandler().getAllAnnouncements()
 
@@ -208,12 +183,7 @@ def getCategoryByCName(name):
 def getAllResources():
 
     if request.method == 'POST':
-        form = {}
-        form['rname'] = request.args.get('rname')
-        form['rstock'] = request.args.get('rstock')
-        form['cid'] = request.args.get('cid')
-        form['rprice'] = request.args.get('rprice')
-        return ResourceHandler().insertResource(form)
+        return ResourceHandler().insertResource(request.json)
     else:
         if not request.args:
             return ResourceHandler().getAllResources()
@@ -237,12 +207,7 @@ def getResourceByRid(rid):
     if request.method == 'GET':
         return ResourceHandler().getRequestByRid(rid)
     elif request.method == 'PUT':
-        form = {}
-        form['rname'] = request.args.get('rname')
-        form['rstock'] = request.args.get('rstock')
-        form['cid'] = request.args.get('cid')
-        form['rprice'] = request.args.get('rprice')
-        return ResourceHandler().updateResource(rid, form)
+        return ResourceHandler().updateResource(rid, form.json)
     elif request.method == 'DELETE':
         return ResourceHandler().deleteResource(rid)
     else:
