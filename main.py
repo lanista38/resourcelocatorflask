@@ -204,16 +204,24 @@ def getCategoryByCName(name):
     return CategoryHandler().getCategoryByCname(name)
 
 #Resource routes
+# @app.route('/ResourceLocator/resource', methods=['GET', 'POST'])
+# def getAllResources():
+#     if request.method == 'POST':
+#         form = {}
+#         form['rname'] = request.args.get('rname')
+#         form['rstock'] = request.args.get('rstock')
+#         form['cid'] = request.args.get('cid')
+#         form['rprice'] = request.args.get('rprice')
+#         return ResourceHandler().insertResource(form)
+#     else:
+#         if not request.args:
+#             return ResourceHandler().getAllResources()
+#         else:
+#             return ResourceHandler().search(request.args)
 @app.route('/ResourceLocator/resource', methods=['GET', 'POST'])
 def getAllResources():
-
     if request.method == 'POST':
-        form = {}
-        form['rname'] = request.args.get('rname')
-        form['rstock'] = request.args.get('rstock')
-        form['cid'] = request.args.get('cid')
-        form['rprice'] = request.args.get('rprice')
-        return ResourceHandler().insertResource(form)
+        return ResourceHandler().insertResource(request.json)
     else:
         if not request.args:
             return ResourceHandler().getAllResources()
