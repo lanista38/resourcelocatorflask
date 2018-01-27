@@ -49,15 +49,15 @@ def getAllRequests():
 @app.route('/ResourceLocator/requests/<int:rid>', methods=['GET', 'PUT', 'DELETE'])
 def getRequestById(rid):
     if request.method == 'GET':
-        return RequestHandler().getRequestByRid(Rid)
+        return RequestHandler().getRequestByRid(rid)
     elif request.method == 'PUT':
         return RequestHandler().updateRequest(rid, form.json)
     else:
         return jsonify(Error="Method not allowed."), 405
 
 @app.route('/ResourceLocator/requests/<int:RPid>')
-def getRequestByRPId(Rid):
-    return RequestHandler().getRequestByRid(Rid)
+def getRequestByRPId(RPid):
+    return RequestHandler().getRequestByRid(RPid)
 
 
 #Reserve/Purchase routes
