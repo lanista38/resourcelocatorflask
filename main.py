@@ -9,7 +9,9 @@ from handler.dashboard import DashboardHandler
 from handler.announcement import AnnouncementHandler
 from handler.reserve import ReserveHandler
 from handler.category import CategoryHandler
-
+from handler.ccard import CcardHandler
+from handler.user import UserHandler
+from handler.payment import PaymentHandler
 
 
 
@@ -18,6 +20,25 @@ app = Flask(__name__)
 @app.route('/')
 def greeting():
     return ' Welcome to Resource locator app'
+
+# Credit Card
+
+@app.route('/ResourceLocator/ccard/', methods=['GET', 'POST'])
+def getCcard():
+        if request.method == 'POST':
+            return CcardHandler().insertCcard(request.json)
+        else:
+            if not request.args:
+                return CcardHandler().getAllCcards()
+
+@app.route('/ResourceLocator/ccard/<int:ccid>', methods=['GET', 'PUT'])
+def getCcardById(ccid):
+    if request.method == 'GET':
+        return CcardHandler().getCcardByccid(ccid)
+    elif request.method == 'PUT':
+        return CcardHandler().updateCcard(ccid, request.json)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 
 # User
@@ -72,15 +93,10 @@ def getRequestById(rid):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-<<<<<<< HEAD
-@app.route('/ResourceLocator/requests/<int:RPid>')
-def getRequestByRPId(RPid):
-    return RequestHandler().getRequestByRid(RPid)
-=======
 @app.route('/ResourceLocator/requests/<string:rname>')
 def getRequestByRPId(rname):
     return RequestHandler().getRequestByResource(rname)
->>>>>>> 60c61e62a5fb3dc57dc5c33f2f4e9ca340951be9
+
 
 
 #Reserve/Purchase routes
