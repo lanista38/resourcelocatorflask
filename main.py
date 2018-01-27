@@ -235,7 +235,7 @@ def getResourceInStockByName(name):
 @app.route('/ResourceLocator/resource/<int:rid>' , methods=['GET', 'PUT', 'DELETE'])
 def getResourceByRid(rid):
     if request.method == 'GET':
-        return ResourceHandler().getRequestByRid(rid)
+        return ResourceHandler().getResourceByRid(rid)
     elif request.method == 'PUT':
         return ResourceHandler().updateResource(rid, form.json)
     elif request.method == 'DELETE':
