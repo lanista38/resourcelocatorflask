@@ -20,6 +20,23 @@ def greeting():
     return ' Welcome to Resource locator app'
 
 
+# User
+@app.route('/ResourceLocator/user/register' , methods=['POST'])
+def getRegisterUser():
+    if request.method == 'POST':
+        return UserHandler().registerUser(request.json)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+# Payment
+@app.route('/ResourceLocator/payment/register', methods=['POST'])
+def getRegisterPayment():
+    if request.method == 'POST':
+        return PaymentHandler().registerPayment(request.json)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
 @app.route('/ResourceLocator/suppliers')
 def getAllSuppliers():
     if not request.args:
@@ -49,15 +66,15 @@ def getAllRequests():
 @app.route('/ResourceLocator/requests/<int:rid>', methods=['GET', 'PUT', 'DELETE'])
 def getRequestById(rid):
     if request.method == 'GET':
-        return RequestHandler().getRequestByRid(Rid)
+        return RequestHandler().getRequestByRid(rid)
     elif request.method == 'PUT':
         return RequestHandler().updateRequest(rid, form.json)
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/ResourceLocator/requests/<int:RPid>')
-def getRequestByRPId(Rid):
-    return RequestHandler().getRequestByRid(Rid)
+@app.route('/ResourceLocator/requests/<string:rname>')
+def getRequestByRPId(rname):
+    return RequestHandler().getRequestByResource(rname)
 
 
 #Reserve/Purchase routes
