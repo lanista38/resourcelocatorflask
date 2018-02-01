@@ -109,7 +109,7 @@ def getRequestByRname(rname):
 @app.route('/ResourceLocator/purchase', methods=['GET', 'POST'])
 def getAllPurchases():
     if request.method == 'POST':
-        return PurchaseHandler().insertPurchase(form.json)
+        return PurchaseHandler().insertPurchase(request.json)
     else:
         if not request.args:
             return PurchaseHandler().getAllPurchases()
