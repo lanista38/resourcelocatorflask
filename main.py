@@ -99,8 +99,13 @@ def getRequestById(rid):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+
+@app.route('/ResourceLocator/requests/<int:RPid>')
+def getRequestByRPId(RPid):
+    return RequestHandler().getRequestByRid(RPid)
+
 @app.route('/ResourceLocator/requests/<string:rname>')
-def getRequestByRPId(rname):
+def getRequestByRname(rname):
     return RequestHandler().getRequestByResource(rname)
 
 
@@ -110,7 +115,7 @@ def getRequestByRPId(rname):
 @app.route('/ResourceLocator/purchase', methods=['GET', 'POST'])
 def getAllPurchases():
     if request.method == 'POST':
-        return PurchaseHandler().insertPurchase(form.json)
+        return PurchaseHandler().insertPurchase(request.json)
     else:
         if not request.args:
             return PurchaseHandler().getAllPurchases()
