@@ -20,3 +20,13 @@ class UserDAO:
         puid = cursor.fetchone()[0]
         self.conn.commit()
         return puid
+
+
+    def getAllUsers(self):
+        cursor = self.conn.cursor()
+        query = "select * from puser;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

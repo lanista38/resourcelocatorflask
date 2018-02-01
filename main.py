@@ -49,6 +49,12 @@ def getRegisterUser():
     else:
         return jsonify(Error="Method not allowed."), 405
 
+# User
+@app.route('/ResourceLocator/user/')
+def getAllUsers():
+        return UserHandler().getAllUsers()
+
+
 # Payment
 @app.route('/ResourceLocator/payment/register', methods=['POST'])
 def getRegisterPayment():
