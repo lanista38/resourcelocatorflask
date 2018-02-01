@@ -133,7 +133,7 @@ def getPurchaseByCustomer(Cid):
 @app.route('/ResourceLocator/reserve/', methods=['GET', 'POST'])
 def getAllReservations():
     if request.method == 'POST':
-        return ReserveHandler().reserveResource(form.json)
+        return ReserveHandler().reserveResource(request.json)
     else:
         return ReserveHandler().getAllReserve()
 
