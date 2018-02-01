@@ -72,15 +72,15 @@ def getRequestById(rid):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-<<<<<<< HEAD
+
 @app.route('/ResourceLocator/requests/<int:RPid>')
 def getRequestByRPId(RPid):
     return RequestHandler().getRequestByRid(RPid)
-=======
+
 @app.route('/ResourceLocator/requests/<string:rname>')
-def getRequestByRPId(rname):
+def getRequestByRname(rname):
     return RequestHandler().getRequestByResource(rname)
->>>>>>> 60c61e62a5fb3dc57dc5c33f2f4e9ca340951be9
+
 
 
 #Reserve/Purchase routes
