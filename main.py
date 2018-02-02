@@ -84,6 +84,13 @@ def getSupplierById(sid):
 def getSuppliersByTownAndCompany(tname, company):
     return SupplierHandler().searchSuppliers(tname, company)
 
+@app.route('/ResourceLocator/supplier/user/register', methods=['POST'])
+def getRegisterSupplierUser():
+    if request.method == 'POST':
+        return SupplierHandler().registerSupplierUser(request.json)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
 
 # User
 @app.route('/ResourceLocator/user/register' , methods=['POST'])
@@ -110,8 +117,7 @@ def getRegisterPayment():
 @app.route('/ResourceLocator/BrowseRequests/', methods=['GET', 'POST'])
 def getAllRequests():
         if request.method == 'POST':
-            form = {}
-            return RequestHandler().insertRequest(form.json)
+            return RequestHandler().insertRequest(request.json)
         else:
             if not request.args:
                 return RequestHandler().getAllRequests()
@@ -121,7 +127,7 @@ def getRequestById(rid):
     if request.method == 'GET':
         return RequestHandler().getRequestByRid(rid)
     elif request.method == 'PUT':
-        return RequestHandler().updateRequest(rid, form.json)
+        return RequestHandler().updateRequest(rid, request.json)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -194,7 +200,7 @@ def postAnnouncement(Rname):
 @app.route('/ResourceLocator/Announcements/' , methods=['GET', 'POST'])
 def getAllAnnouncements():
     if request.method == 'POST':
-        return AnnouncementHandler().insertAnnouncement(form.json)
+        return AnnouncementHandler().insertAnnouncement(request.json)
     else:
         return AnnouncementHandler().getAllAnnouncements()
 
@@ -254,21 +260,6 @@ def getCategoryByCid(Cid):
 def getCategoryByCName(name):
     return CategoryHandler().getCategoryByCname(name)
 
-#Resource routes
-# @app.route('/ResourceLocator/resource', methods=['GET', 'POST'])
-# def getAllResources():
-#     if request.method == 'POST':
-#         form = {}
-#         form['rname'] = request.args.get('rname')
-#         form['rstock'] = request.args.get('rstock')
-#         form['cid'] = request.args.get('cid')
-#         form['rprice'] = request.args.get('rprice')
-#         return ResourceHandler().insertResource(form)
-#     else:
-#         if not request.args:
-#             return ResourceHandler().getAllResources()
-#         else:
-#             return ResourceHandler().search(request.args)
 @app.route('/ResourceLocator/resource', methods=['GET', 'POST'])
 def getAllResources():
     if request.method == 'POST':
@@ -296,7 +287,7 @@ def getResourceByRid(rid):
     if request.method == 'GET':
         return ResourceHandler().getResourceByRid(rid)
     elif request.method == 'PUT':
-        return ResourceHandler().updateResource(rid, form.json)
+        return ResourceHandler().updateResource(rid, request.json)
     elif request.method == 'DELETE':
         return ResourceHandler().deleteResource(rid)
     else:

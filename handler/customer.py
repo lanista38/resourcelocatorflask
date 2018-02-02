@@ -15,8 +15,9 @@ class CustomerHandler:
         result['tid'] = tid
         return result
 
-    def build_part_attributesUser(self, username, password, cid, sid):
+    def build_part_attributesUser(self, puid ,username, password, cid, sid):
         result = {}
+        result['puid'] = puid
         result['username'] = username
         result['password'] = password
         result['cid'] = cid
@@ -81,8 +82,8 @@ class CustomerHandler:
                 result = self.build_part_attributes(cid, name, lastname, gpsy, gpsx, address, tid)
                 if username and password and cid:
                     dao = UserDAO()
-                    rid = dao.registerUser(username, password, cid, None)
-                    result1 = self.build_part_attributesUser(username, password, cid, None)
+                    puid = dao.registerUser(username, password, cid, None)
+                    result1 = self.build_part_attributesUser(puid, username, password, cid, None)
                 return jsonify({"Customer": result,"User": result1}), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400

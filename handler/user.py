@@ -4,8 +4,9 @@ from dao.user import UserDAO
 
 class UserHandler:
 
-    def build_part_attributes(self, username, password, cid, sid):
+    def build_part_attributes(self, puid, username, password, cid, sid):
         result = {}
+        result['puid'] = puid
         result['username'] = username
         result['password'] = password
         result['cid'] = cid
@@ -14,10 +15,11 @@ class UserHandler:
 
     def build_User_dict(self, row):
         result = {}
-        result['username'] = row[0]
-        result['password'] = row[1]
-        result['cid'] = row[2]
-        result['sid'] = row[3]
+        result['puid'] = row[0]
+        result['username'] = row[1]
+        result['password'] = row[2]
+        result['cid'] = row[3]
+        result['sid'] = row[4]
         return result
 
     def registerUser(self, form):
@@ -31,8 +33,8 @@ class UserHandler:
             sid = form.get('sid') or None
             if username and password and (cid or sid):
                 dao = UserDAO()
-                rid = dao.registerUser(username, password, cid, sid)
-                result = self.build_part_attributes(username, password, cid, sid)
+                puid = dao.registerUser(username, password, cid, sid)
+                result = self.build_part_attributes(puid, username, password, cid, sid)
                 return jsonify(Part=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400

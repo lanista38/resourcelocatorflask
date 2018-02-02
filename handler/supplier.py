@@ -1,8 +1,17 @@
 from flask import jsonify
 from dao.supplier import SupplierDAO
-
+from dao.user import UserDAO
 
 class SupplierHandler:
+
+    def build_part_attributesUser(self, puid ,username, password, cid, sid):
+        result = {}
+        result['puid'] = puid
+        result['username'] = username
+        result['password'] = password
+        result['cid'] = cid
+        result['sid'] = sid
+        return result
 
     def build_part_attributes(self, sid, name, lastname, company, gpsy, gpsx, address, tid):
         result = {}
@@ -124,8 +133,34 @@ class SupplierHandler:
             tid = form['tid']
             if name and company and lastname and address and tid:
                 dao = SupplierDAO()
-                cid = dao.registerSupplier(name, lastname, company, gpsy, gpsx, address, tid)
-                result = self.build_part_attributes(cid, name, lastname, company, gpsy, gpsx, address, tid)
+                sid = dao.registerSupplier(name, lastname, company, gpsy, gpsx, address, tid)
+                result = self.build_part_attributes(sid, name, lastname, company, gpsy, gpsx, address, tid)
                 return jsonify(Supplier=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+    def registerSupplierUser(self, form):
+        print(form)
+        if len(form) != 9:
+            return jsonify(Error = "Bad post request "), 400
+        else:
+            name = form['name']
+            lastname = form['lastname']
+            company = form['company']
+            gpsy = form.get('gpsy') or None
+            gpsx = form.get('gpsx') or None
+            address = form['address']
+            tid = form['tid']
+            username = form['username']
+            password = form['password']
+            if name and lastname and address and tid:
+                dao = SupplierDAO()
+                sid = dao.registerSupplier(name, lastname, company, gpsy, gpsx, address, tid)
+                result = self.build_part_attributes(sid, name, lastname, company, gpsy, gpsx, address, tid)
+                if username and password and sid:
+                    dao = UserDAO()
+                    puid = dao.registerUser(username, password, None, sid)
+                    result1 = self.build_part_attributesUser(puid,username, password, None, sid)
+                return jsonify({"Supplier": result,"User": result1}), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
