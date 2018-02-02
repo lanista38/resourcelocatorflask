@@ -50,7 +50,7 @@ class ResourceHandler:
             else:
                 rname = form['rname']
                 cid = form['cid']
-                if rname and rstock and cid:
+                if rname and cid:
                     dao.updateResource(rid, rname, cid)
                     result = self.build_resource_dict_instert(rid, rname, cid)
                     return jsonify(Resource=result), 200
