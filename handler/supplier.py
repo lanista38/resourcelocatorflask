@@ -39,15 +39,15 @@ class SupplierHandler:
 
     def build_supplier_town_dict(self, row):
         result = {}
-        result['sid'] = row[0]
-        result['name'] = row[1]
-        result['lastname'] = row[2]
-        result['company'] = row[3]
-        result['gpsy'] = row[4]
-        result['gpsx'] = row[5]
-        result['address'] = row[6]
+        result['sid'] = row[1]
+        result['name'] = row[2]
+        result['lastname'] = row[3]
+        result['company'] = row[4]
+        result['gpsy'] = row[5]
+        result['gpsx'] = row[6]
+        result['address'] = row[7]
         result['tname'] = row[8]
-        result['tid'] = row[9]
+        result['tid'] = row[0]
         return result
 
     def getAllSuppliers(self):
@@ -97,7 +97,7 @@ class SupplierHandler:
 
     def searchSuppliers(self, args):
         town = args.get("town")
-        material = args.get("company")
+        company = args.get("company")
         dao = SupplierDAO()
         parts_list = []
         if (len(args) == 2) and town and company:
@@ -110,12 +110,12 @@ class SupplierHandler:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
         if town:
-            for row in part_list:
-                result = build_supplier_town_dict(row)
+            for row in parts_list:
+                result = self.build_supplier_town_dict(row)
                 result_list.append(result)
         else:
             for row in parts_list:
-                result = self.build_part_dict(row)
+                result = self.build_supplier_town_dict(row)
                 result_list.append(result)
         return jsonify(Parts=result_list)
 

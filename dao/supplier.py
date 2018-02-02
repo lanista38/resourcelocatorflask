@@ -36,6 +36,15 @@ class SupplierDAO:
             result.append(row)
         return result
 
+    def getSuppliersByCompany(self, company):
+        cursor = self.conn.cursor()
+        query = "select * from supplier natural inner join Town where company = %s;"
+        cursor.execute(query, (company,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     # def getSuppliersByCompany(self, company):
     #     cursor = self.conn.cursor()
     #     query = "select * from upplier where company= %s;"
@@ -45,10 +54,10 @@ class SupplierDAO:
     #         result.append(row)
     #     return result
 
-    def getSuppliersByTown(self, tname):
+    def getSuppliersByTownAndCompany(self, tname, company):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join town where tname = %s;"
-        cursor.execute(query, (tname, company))
+        query = "select * from supplier natural inner join town where tname = %s and company = %s;"
+        cursor.execute(query, (tname,company))
         result = []
         for row in cursor:
             result.append(row)
