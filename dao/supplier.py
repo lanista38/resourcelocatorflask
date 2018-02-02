@@ -71,3 +71,11 @@ class SupplierDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def registerSupplier(self, name, lastname, company, gpsy, gpsx, address, tid):
+        cursor = self.conn.cursor()
+        query ="INSERT INTO supplier(name, lastname, company, gpsy, gpsx, address, tid) VALUES (%s, %s, %s, %s, %s, %s, %s) returning sid;"
+        cursor.execute(query, (name, lastname, company, gpsy, gpsx, address, tid))
+        puid = cursor.fetchone()[0]
+        self.conn.commit()
+        return puid

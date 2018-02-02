@@ -12,6 +12,8 @@ from handler.category import CategoryHandler
 from handler.ccard import CcardHandler
 from handler.user import UserHandler
 from handler.payment import PaymentHandler
+from handler.customer import CustomerHandler
+from handler.supplier import SupplierHandler
 
 
 
@@ -40,6 +42,48 @@ def getCcardById(ccid):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+# Customer
+@app.route('/ResourceLocator/customer/register', methods=['POST'])
+def getRegisterCustomer():
+    if request.method == 'POST':
+        return CustomerHandler().registerCustomer(request.json)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/ResourceLocator/customer/user/register', methods=['POST'])
+def getRegisterCustomerUser():
+    if request.method == 'POST':
+        return CustomerHandler().registerCustomerUser(request.json)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/ResourceLocator/customer/')
+def getAllCustomers():
+    return CustomerHandler().getAllCustomers()
+
+# Supplier
+@app.route('/ResourceLocator/supplier/register', methods=['POST'])
+def getRegisterSupplier():
+    if request.method == 'POST':
+        return SupplierHandler().registerSupplier(request.json)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/ResourceLocator/suppliers')
+def getAllSuppliers():
+    if not request.args:
+        return SupplierHandler().getAllSuppliers()
+    else:
+        return SupplierHandler().searchSuppliers(request.args)
+
+@app.route('/ResourceLocator/suppliers/<int:sid>')
+def getSupplierById(sid):
+    return SupplierHandler().getSupplierById(sid)
+
+@app.route('/ResourceLocator/suppliers/<string:company>/town/<string:tname>')
+def getSuppliersByTownAndCompany(tname, company):
+    return SupplierHandler().searchSuppliers(tname, company)
+
 
 # User
 @app.route('/ResourceLocator/user/register' , methods=['POST'])
@@ -49,7 +93,6 @@ def getRegisterUser():
     else:
         return jsonify(Error="Method not allowed."), 405
 
-# User
 @app.route('/ResourceLocator/user/')
 def getAllUsers():
         return UserHandler().getAllUsers()
@@ -62,23 +105,6 @@ def getRegisterPayment():
         return PaymentHandler().registerPayment(request.json)
     else:
         return jsonify(Error="Method not allowed."), 405
-
-
-@app.route('/ResourceLocator/suppliers')
-def getAllSuppliers():
-    if not request.args:
-        return SupplierHandler().getAllSuppliers()
-    else:
-        return SupplierHandler().searchSuppliers(request.args)
-
-
-@app.route('/ResourceLocator/suppliers/<int:sid>')
-def getSupplierById(sid):
-    return SupplierHandler().getSupplierById(sid)
-
-@app.route('/ResourceLocator/suppliers/<string:company>/town/<string:tname>')
-def getSuppliersByTownAndCompany(tname, company):
-    return SupplierHandler().searchSuppliers(tname, company)
 
 # Resource Requests routes
 @app.route('/ResourceLocator/BrowseRequests/', methods=['GET', 'POST'])

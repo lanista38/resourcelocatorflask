@@ -3,6 +3,19 @@ from dao.supplier import SupplierDAO
 
 
 class SupplierHandler:
+
+    def build_part_attributes(self, sid, name, lastname, company, gpsy, gpsx, address, tid):
+        result = {}
+        result['sid'] = sid
+        result['name'] = name
+        result['lastname'] = lastname
+        result['company'] = company
+        result['gpsy'] = gpsy
+        result['gpsx'] = gpsx
+        result['address'] = address
+        result['tid'] = tid
+        return result
+
     def build_supplier_dict(self, row):
         result = {}
         result['sid'] = row[0]
@@ -96,3 +109,23 @@ class SupplierHandler:
                 result = self.build_part_dict(row)
                 result_list.append(result)
         return jsonify(Parts=result_list)
+
+    def registerSupplier(self, form):
+        print(form)
+        if len(form) != 7:
+            return jsonify(Error = "Bad post request "), 400
+        else:
+            name = form['name']
+            lastname = form['lastname']
+            company = form['company']
+            gpsy = form.get('gpsy') or None
+            gpsx = form.get('gpsx') or None
+            address = form['address']
+            tid = form['tid']
+            if name and company and lastname and address and tid:
+                dao = SupplierDAO()
+                cid = dao.registerSupplier(name, lastname, company, gpsy, gpsx, address, tid)
+                result = self.build_part_attributes(cid, name, lastname, company, gpsy, gpsx, address, tid)
+                return jsonify(Supplier=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
