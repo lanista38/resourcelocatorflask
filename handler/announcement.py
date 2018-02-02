@@ -95,13 +95,19 @@ class AnnouncementHandler:
             result_list.append(result)
         return jsonify(AllAnnouncementsBySupplier=result_list)
         #to-do
-    def AnnounceResource(self,Rname):
-        result = self.build_announcement_dict()
-        return jsonify(result)
 
-    def getAnnouncementByResourceName(self,Rname):
+    def AnnounceResource(self,Rname):
         dao = AnnouncementDAO()
-        announcement_list = dao.getAnnouncementByResourceName(Rname)
+        announcement_list = dao.getAnnouncementByResource(Rname)
+        result_list = []
+        for row in announcement_list:
+            result = self.build_announcement_dict(row)
+            result_list.append(result)
+        return jsonify(AnnounceResource=result_list)
+
+    def getAnnouncementByResource(self,Rname):
+        dao = AnnouncementDAO()
+        announcement_list = dao.getAnnouncementByResource(Rname)
         result_list = []
         for row in announcement_list:
             result = self.build_resource_dict(row)
