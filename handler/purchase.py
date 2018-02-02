@@ -68,9 +68,9 @@ class PurchaseHandler:
             result_list.append(result)
         return jsonify(result_list)
 
-    def getPurchaseBySupplier(self, Rid):
+    def getPurchaseBySupplier(self, Sid):
         dao = PurchaseDAO()
-        purchase_list = dao.getPurchaseBySupplier(Rid)
+        purchase_list = dao.getPurchaseBySupplier(Sid)
         result_list = []
         for row in purchase_list:
             result = self.build_purchase_dict(row)

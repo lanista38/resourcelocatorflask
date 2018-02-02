@@ -306,9 +306,9 @@ def getResourcesByCid(Rid):
 def getResourceByCategoryName(name):
     return ResourceHandler().getResourceByCategoryName(name)
 
-@app.route('/ResourceLocator/resource/<string:name>/supplier/<int:Sid>')
-def getResourceBySupplier(name,Sid):
-    return ResourceHandler().getResourceBySupplier(name,Sid)
+@app.route('/ResourceLocator/resource/<int:rid>/supplier/<int:Sid>')
+def getResourceBySupplier(rid,Sid):
+    return ResourceHandler().getResourceBySupplier(rid,Sid)
 
 @app.route('/ResourceLocator/resource/<int:rid>/region/<int:tid>')
 def getResourceByIdRegion(rid,tid):

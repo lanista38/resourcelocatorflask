@@ -41,6 +41,14 @@ class PurchaseDAO:
         for row in cursor:
             result.append(row)
         return result
+    def getPurchaseBySupplier(self,Sid):
+        cursor = self.conn.cursor()
+        query = "select * from purchase p natural join supplier s where s.sid = %s ;"
+        cursor.execute(query,[Sid])
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
     def getSearch(self,args):
         cursor = self.conn.cursor()
