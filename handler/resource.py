@@ -23,7 +23,7 @@ class ResourceHandler:
 
     def insertResource(self, form):
         if len(form) != 4:
-            print(form['rname'])
+            
             return jsonify(Error = "Bad post request "), 400
         else:
             rname = form['rname']
