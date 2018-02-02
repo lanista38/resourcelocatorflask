@@ -77,8 +77,8 @@ class ResourceDAO:
     #Operation 14
     def getResourceBySupplier(self,Rid,Sid):
         cursor = self.conn.cursor()
-        query = "select r.rid,r.rname,rt.stock,t.tname from town t natural join res_tow_sup rt natural join resource r natural join supplier s where (r.rid=%s or r.rname=%s) and s.sid=%s;"
-        cursor.execute(query,(Rid,Rid,Sid))
+        query = "select r.rid,r.rname,rt.stock,t.tname from town t natural join res_tow_sup rt natural join resource r natural join supplier s where (r.rname=%s) and s.sid=%s;"
+        cursor.execute(query,(Rid,Sid))
         result = []
         for row in cursor:
             result.append(row)
