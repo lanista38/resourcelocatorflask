@@ -90,7 +90,7 @@ class ResourceHandler:
             parts_list = dao.getResourceInStockByName(rname)
             result_list = []
             for row in parts_list:
-                result = self.build_resource_dict(row)
+                result = self.build_resource_dict_stock(row)
                 result_list.append(result)
             return jsonify(Resource=result_list)
 

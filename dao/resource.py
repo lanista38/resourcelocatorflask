@@ -51,7 +51,7 @@ class ResourceDAO:
             #resources Available, will not work now
     def getResourceInStockByName(self, rname):
         cursor = self.conn.cursor()
-        query = "select  rname, cid, sum(aqty) from resource  natural join announcement where rname ilike %(like)s Group By rname;"
+        query = "select rid, rname, cid, sum(aqty) from resource  natural join announcement where rname ilike %(like)s Group By rid;"
         cursor.execute(query, dict(like= '%'+rname+'%'))
         result = []
         for row in cursor:
