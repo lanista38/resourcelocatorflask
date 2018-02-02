@@ -62,7 +62,7 @@ class AnnouncementDAO:
 
     def getAnnouncementByResource(self, Rid):
         cursor = self.conn.cursor()
-        query = "select * from Announcement where Rid = %s;"
+        query = "select * from Announcement natural inner join Resource where Rname = %s;"
         result = []
         cursor.execute(query,(Rid,))
         for row in cursor:
