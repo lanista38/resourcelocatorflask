@@ -10,6 +10,14 @@ class ResourceHandler:
         result['Rname'] = row[1]
         result['cid'] = row[3]
         return result
+
+    def build_resource_dict_stock(self, row):
+        result = {}
+        result['Rid'] = row[0]
+        result['Rname'] = row[1]
+        result['cid'] = row[2]
+        result['allstock'] = row[3]
+        return result
     def build_resource_dict_instert(self, rid, rname, cid):
         result = {}
         result['Rid'] = rid
@@ -72,7 +80,7 @@ class ResourceHandler:
             parts_list = dao.getAllResourcesInStock()
             result_list = []
             for row in parts_list:
-                result = self.build_resource_dict(row)
+                result = self.build_resource_dict_stock(row)
                 result_list.append(result)
             return jsonify(Resource=result_list)
             #Resources Available/ will not work
