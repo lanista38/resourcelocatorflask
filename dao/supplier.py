@@ -10,7 +10,7 @@ class SupplierDAO:
 
     def getAllSuppliers(self):
         cursor = self.conn.cursor()
-        query = "select* from supplier;"
+        query = "select * from supplier;"
         cursor.execute(query)
         result = []
         for row in cursor:
