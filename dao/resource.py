@@ -40,6 +40,7 @@ class ResourceDAO:
             result.append(row)
         return result
         #operation 8 --> resources Available, will not work now
+<<<<<<< HEAD
     def getAllResourcesInStock(self):
         cursor = self.conn.cursor()
         query = "select rid, rname, cid, sum(aqty) from resource  natural join announcement Group By rid;"
@@ -57,6 +58,25 @@ class ResourceDAO:
         for row in cursor:
             result.append(row)
         return result
+=======
+    # def getAllResourcesInStock(self):
+    #     cursor = self.conn.cursor()
+    #     query = "select * from resource where rstock > 0;"
+    #     cursor.execute(query)
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
+            #resources Available, will not work now
+    # def getResourceInStockByName(self, rname):
+    #     cursor = self.conn.cursor()
+    #     query = "select * from resource where rstock > 0 and rname ilike %(like)s;"
+    #     cursor.execute(query, dict(like= '%'+rname+'%'))
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
+>>>>>>> 6299537232d5a57661e1bf65a99516c64df646e2
 
     def getResourceByRid(self, Rid):
         cursor = self.conn.cursor()
@@ -77,7 +97,7 @@ class ResourceDAO:
     #Operation 14
     def getResourceBySupplier(self,Rid,Sid):
         cursor = self.conn.cursor()
-        query = "select r.rid,r.rname,rt.stock,t.tname from town t natural join res_tow_sup rt natural join resource r natural join supplier s where (r.rid=%s or r.rname=%s) and s.sid=%s;"
+        query = "select r.rid,r.rname,t.tname from town t natural join res_tow_sup rt natural join resource r natural join supplier s where (r.rid=%s or r.rname=%s) and s.sid=%s;"
         cursor.execute(query,(Rid,Rid,Sid))
         result = []
         for row in cursor:
