@@ -9,10 +9,10 @@ class ResourceDAO:
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
 
-    def insertResource(self, rname, rstock, cid):
+    def insertResource(self, rname, cid):
         cursor = self.conn.cursor()
-        query = "insert into Resource(rname, rstock, cid) values (%s, %s, %s) returning rid;"
-        cursor.execute(query, (rname, rstock, cid,))
+        query = "insert into Resource(rname, cid) values (%s, %s, %s) returning rid;"
+        cursor.execute(query, (rname, cid,))
         rid = cursor.fetchone()[0]
         self.conn.commit()
         return rid
@@ -26,8 +26,8 @@ class ResourceDAO:
 
     def updateResource(self, rid, rname, rstock, cid):
         cursor = self.conn.cursor()
-        query = "update Resource set rname = %s, rstock = %s, cid = %s where rid = %s;"
-        cursor.execute(query, (rname, rstock, cid, rid,))
+        query = "update Resource set rname = %s, cid = %s where rid = %s;"
+        cursor.execute(query, (rname, cid, rid,))
         self.conn.commit()
         return rid
 
@@ -39,7 +39,7 @@ class ResourceDAO:
         for row in cursor:
             result.append(row)
         return result
-        #operation 8 --> resources Available
+        #operation 8 --> resources Available, will not work now
     def getAllResourcesInStock(self):
         cursor = self.conn.cursor()
         query = "select * from resource where rstock > 0;"
@@ -48,7 +48,7 @@ class ResourceDAO:
         for row in cursor:
             result.append(row)
         return result
-
+            #resources Available, will not work now
     def getResourceInStockByName(self, rname):
         cursor = self.conn.cursor()
         query = "select * from resource where rstock > 0 and rname ilike %(like)s;"

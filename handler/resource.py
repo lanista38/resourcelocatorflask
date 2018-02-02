@@ -8,24 +8,21 @@ class ResourceHandler:
         result = {}
         result['Rid'] = row[0]
         result['Rname'] = row[1]
-        result['rstock'] = row[2]
         result['cid'] = row[3]
         return result
-    def build_resource_dict_instert(self, rid, rname, rstock, cid):
+    def build_resource_dict_instert(self, rid, rname, cid):
         result = {}
         result['Rid'] = rid
         result['Rname'] = rname
-        result['rstock'] = rstock
         result['cid'] = cid
         return result
 
     def insertResource(self, form):
-        if len(form) != 3:
-            
+        if len(form) != 2:
+
             return jsonify(Error = "Bad post request "), 400
         else:
             rname = form['rname']
-            rstock = form['rstock']
             cid = form['cid']
             if rname and rstock and cid:
                 dao = ResourceDAO()
@@ -48,15 +45,14 @@ class ResourceHandler:
         if not dao.getResourceByRid(rid):
             return jsonify(Error = "Part not found."), 404
         else:
-            if len(form) != 3:
+            if len(form) != 2:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 rname = form['rname']
-                rstock = form['rstock']
                 cid = form['cid']
                 if rname and rstock and cid:
-                    dao.updateResource(rid, rname, rstock, cid)
-                    result = self.build_resource_dict_instert(rid, rname, rstock, cid)
+                    dao.updateResource(rid, rname, cid)
+                    result = self.build_resource_dict_instert(rid, rname, cid)
                     return jsonify(Resource=result), 200
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
@@ -70,7 +66,7 @@ class ResourceHandler:
             result_list.append(result)
         return jsonify(Resources=result_list)
 
-        #operation 8 --> Resources Available
+        #operation 8 --> Resources Available/ will not work
     def getAllResourcesInStock(self):
             dao = ResourceDAO()
             parts_list = dao.getAllResourcesInStock()
@@ -79,7 +75,7 @@ class ResourceHandler:
                 result = self.build_resource_dict(row)
                 result_list.append(result)
             return jsonify(Resource=result_list)
-
+            #Resources Available/ will not work
     def getResourceInStockByName(self, rname):
             dao = ResourceDAO()
             #name = args.get("rname")
