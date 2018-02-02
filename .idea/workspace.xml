@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39101150-6ce3-4230-8922-244e80cdd112" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="39101150-6ce3-4230-8922-244e80cdd112" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,11 +10,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/resourcelocatorflask$resourcelocatorflask.coverage" NAME="resourcelocatorflask Coverage Results" MODIFIED="1517592287875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/resourcelocatorflask$resourcelocatorflask.coverage" NAME="resourcelocatorflask Coverage Results" MODIFIED="1517594114192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -30,7 +28,7 @@
       <file leaf-file-name="announcement.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/handler/announcement.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
+            <state relative-caret-position="1768">
               <caret line="105" column="51" lean-forward="false" selection-start-line="105" selection-start-column="51" selection-end-line="105" selection-end-column="51" />
               <folding />
             </state>
@@ -40,19 +38,9 @@
       <file leaf-file-name="announcement.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dao/announcement.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
+            <state relative-caret-position="1071">
               <caret line="64" column="83" lean-forward="false" selection-start-line="64" selection-start-column="83" selection-end-line="64" selection-end-column="83" />
-              <folding>
-                <marker date="1517592143348" expanded="true" signature="547:642" ph="insert into Announcement... " />
-                <marker date="1517592143348" expanded="true" signature="880:919" ph="delete from " />
-                <marker date="1517592143348" expanded="true" signature="1118:1189" ph="update Annou... " />
-                <marker date="1517592143348" expanded="true" signature="1378:1404" ph="select * fro... Announcement" />
-                <marker date="1517592143348" expanded="true" signature="1640:1720" ph="select * fro... Announcement" />
-                <marker date="1517592143348" expanded="true" signature="1974:2043" ph="select * fro... Announcement" />
-                <marker date="1517592143348" expanded="true" signature="2283:2354" ph="select * fro... Announcement" />
-                <marker date="1517592143348" expanded="true" signature="2600:2654" ph="select * fro... Announcement" />
-                <marker date="1517592143348" expanded="true" signature="2870:2911" ph="select * fro... Announcement" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -111,8 +99,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -155,6 +141,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -365,13 +353,13 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29242262" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29242262" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -393,6 +381,30 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/handler/announcement.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="105" column="51" lean-forward="false" selection-start-line="105" selection-start-column="51" selection-end-line="105" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/announcement.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="64" column="83" lean-forward="false" selection-start-line="64" selection-start-column="83" selection-end-line="64" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dao/customer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -455,14 +467,6 @@
           <caret line="29" column="17" lean-forward="false" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
-            <marker date="1517591053967" expanded="true" signature="509:531" ph="select * fro... supplier" />
-            <marker date="1517591053967" expanded="true" signature="761:798" ph="select * fro... supplier" />
-            <marker date="1517591053967" expanded="true" signature="1065:1128" ph="select * fro... supplier" />
-            <marker date="1517591053967" expanded="true" signature="1372:1437" ph="select * fro... supplier" />
-            <marker date="1517591053967" expanded="true" signature="1995:2058" ph="select * fro... supplier" />
-            <marker date="1517591053967" expanded="true" signature="2358:2427" ph="select * fro... supplier" />
-            <marker date="1517591053967" expanded="true" signature="2670:2769" ph="select * fro... supplier" />
-            <marker date="1517591053967" expanded="true" signature="3048:3169" ph="INSERT INTO supplier... " />
           </folding>
         </state>
       </provider>
@@ -491,45 +495,21 @@
           <caret line="80" column="30" lean-forward="false" selection-start-line="80" selection-start-column="30" selection-end-line="80" selection-end-column="30" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
-            <marker date="1517591662517" expanded="true" signature="529:603" ph="insert into Resource... " />
-            <marker date="1517591662517" expanded="true" signature="829:864" ph="delete from " />
-            <marker date="1517591662517" expanded="true" signature="1060:1128" ph="update Resou... " />
-            <marker date="1517591662517" expanded="true" signature="1320:1342" ph="select * fro... resource" />
-            <marker date="1517591662517" expanded="true" signature="1611:1650" ph="select * fro... resource" />
-            <marker date="1517591662517" expanded="true" signature="1884:1948" ph="select * fro... resource" />
-            <marker date="1517591662517" expanded="true" signature="2199:2236" ph="select * fro... resource" />
-            <marker date="1517591662517" expanded="true" signature="2427:2476" ph="select * fro... resource" />
-            <marker date="1517591662517" expanded="true" signature="2752:2909" ph="select r.rid... town" />
-            <marker date="1517591662517" expanded="true" signature="3143:3180" ph="select * fro... resource" />
-            <marker date="1517591662517" expanded="true" signature="3415:3455" ph="select * fro... resource" />
-            <marker date="1517591662517" expanded="true" signature="3700:3753" ph="select * fro... resource" />
-            <marker date="1517591662517" expanded="true" signature="4001:4080" ph="select r.* f... resource" />
-            <marker date="1517591662517" expanded="true" signature="4356:4439" ph="select * fro... resource" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dao/announcement.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
+        <state relative-caret-position="1071">
           <caret line="64" column="83" lean-forward="false" selection-start-line="64" selection-start-column="83" selection-end-line="64" selection-end-column="83" />
-          <folding>
-            <marker date="1517592143348" expanded="true" signature="547:642" ph="insert into Announcement... " />
-            <marker date="1517592143348" expanded="true" signature="880:919" ph="delete from " />
-            <marker date="1517592143348" expanded="true" signature="1118:1189" ph="update Annou... " />
-            <marker date="1517592143348" expanded="true" signature="1378:1404" ph="select * fro... Announcement" />
-            <marker date="1517592143348" expanded="true" signature="1640:1720" ph="select * fro... Announcement" />
-            <marker date="1517592143348" expanded="true" signature="1974:2043" ph="select * fro... Announcement" />
-            <marker date="1517592143348" expanded="true" signature="2283:2354" ph="select * fro... Announcement" />
-            <marker date="1517592143348" expanded="true" signature="2600:2654" ph="select * fro... Announcement" />
-            <marker date="1517592143348" expanded="true" signature="2870:2911" ph="select * fro... Announcement" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/handler/announcement.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
+        <state relative-caret-position="1768">
           <caret line="105" column="51" lean-forward="false" selection-start-line="105" selection-start-column="51" selection-end-line="105" selection-end-column="51" />
           <folding />
         </state>
