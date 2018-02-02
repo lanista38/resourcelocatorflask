@@ -11,7 +11,7 @@ class ResourceDAO:
 
     def insertResource(self, rname, cid):
         cursor = self.conn.cursor()
-        query = "insert into Resource(rname, cid) values (%s, %s, %s) returning rid;"
+        query = "insert into Resource(rname, cid) values (%s, %s) returning rid;"
         cursor.execute(query, (rname, cid,))
         rid = cursor.fetchone()[0]
         self.conn.commit()
@@ -24,7 +24,7 @@ class ResourceDAO:
         self.conn.commit()
         return rid
 
-    def updateResource(self, rid, rname, rstock, cid):
+    def updateResource(self, rid, rname, cid):
         cursor = self.conn.cursor()
         query = "update Resource set rname = %s, cid = %s where rid = %s;"
         cursor.execute(query, (rname, cid, rid,))
