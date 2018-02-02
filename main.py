@@ -195,7 +195,7 @@ def postRequest(Rname):
 
 @app.route('/ResourceLocator/AnnounceResource/Resource/<string:Rname>')
 def postAnnouncement(Rname):
-    return AnnouncementHandler().AnnounceResource(Rname)
+    return AnnouncementHandler().getAnnouncementByResourceName(Rname)
 
 @app.route('/ResourceLocator/Announcements/' , methods=['GET', 'POST'])
 def getAllAnnouncements():
@@ -220,7 +220,7 @@ def searchRequests(Rname):
 
 @app.route('/ResourceLocator/SearchAnnounce/Resource/<string:Rname>')
 def searchAnnouncements(Rname):
-    return AnnouncementHandler().getAnnouncementByResource(Rname)
+    return AnnouncementHandler().getAnnouncementByResourceName(Rname)
 #7 Operation Browse resources being requested
 @app.route('/ResourceLocator/SearchAllRequests/')
 def searchRequestsAll():

@@ -99,9 +99,9 @@ class AnnouncementHandler:
         result = self.build_announcement_dict()
         return jsonify(result)
 
-    def getAnnouncementByResource(self,Rname):
+    def getAnnouncementByResourceName(self,Rname):
         dao = AnnouncementDAO()
-        announcement_list = dao.getAnnouncementByResource(Rname)
+        announcement_list = dao.getAnnouncementByResourceName(Rname)
         result_list = []
         for row in announcement_list:
             result = self.build_resource_dict(row)
