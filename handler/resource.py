@@ -24,10 +24,10 @@ class ResourceHandler:
         else:
             rname = form['rname']
             cid = form['cid']
-            if rname and rstock and cid:
+            if rname and cid:
                 dao = ResourceDAO()
-                rid = dao.insertResource(rname, rstock, cid)
-                result = self.build_resource_dict_instert(rid, rname, rstock, cid)
+                rid = dao.insertResource(rname, cid)
+                result = self.build_resource_dict_instert(rid, rname, cid)
                 return jsonify(Resource=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
