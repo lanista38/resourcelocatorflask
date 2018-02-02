@@ -10,30 +10,27 @@ class ResourceHandler:
         result['Rname'] = row[1]
         result['rstock'] = row[2]
         result['cid'] = row[3]
-        result['rprice'] = row[4]
         return result
-    def build_resource_dict_instert(self, rid, rname, rstock, cid, rprice):
+    def build_resource_dict_instert(self, rid, rname, rstock, cid):
         result = {}
         result['Rid'] = rid
         result['Rname'] = rname
         result['rstock'] = rstock
-        result['rprice'] = cid
         result['cid'] = cid
         return result
 
     def insertResource(self, form):
-        if len(form) != 4:
+        if len(form) != 3:
             
             return jsonify(Error = "Bad post request "), 400
         else:
             rname = form['rname']
-            rprice = form['rprice']
             rstock = form['rstock']
             cid = form['cid']
-            if rname and rprice and rstock and cid:
+            if rname and rstock and cid:
                 dao = ResourceDAO()
-                rid = dao.insertResource(rname, rstock, cid, rprice)
-                result = self.build_resource_dict_instert(rid, rname, rstock, cid, rprice)
+                rid = dao.insertResource(rname, rstock, cid)
+                result = self.build_resource_dict_instert(rid, rname, rstock, cid)
                 return jsonify(Resource=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
@@ -51,16 +48,15 @@ class ResourceHandler:
         if not dao.getResourceByRid(rid):
             return jsonify(Error = "Part not found."), 404
         else:
-            if len(form) != 4:
+            if len(form) != 3:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 rname = form['rname']
-                rprice = form['rprice']
                 rstock = form['rstock']
                 cid = form['cid']
-                if rname and rprice and rstock and cid:
-                    dao.updateResource(rid, rname, rstock, cid, rprice)
-                    result = self.build_resource_dict_instert(rid, rname, rstock, cid, rprice)
+                if rname and rstock and cid:
+                    dao.updateResource(rid, rname, rstock, cid)
+                    result = self.build_resource_dict_instert(rid, rname, rstock, cid)
                     return jsonify(Resource=result), 200
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
@@ -83,6 +79,7 @@ class ResourceHandler:
                 result = self.build_resource_dict(row)
                 result_list.append(result)
             return jsonify(Resource=result_list)
+
     def getResourceInStockByName(self, rname):
             dao = ResourceDAO()
             #name = args.get("rname")
