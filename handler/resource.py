@@ -126,7 +126,7 @@ class ResourceHandler:
         parts_list = dao.getResourceBySupplier(Rid,Sid)
         result_list = []
         for row in parts_list:
-            result = self.build_resource_dictt(row)
+            result = self.build_resource_dict(row)
             result_list.append(result)
         return jsonify(Resource=result_list)
 

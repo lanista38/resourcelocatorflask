@@ -195,7 +195,7 @@ def postRequest(Rname):
 
 @app.route('/ResourceLocator/AnnounceResource/Resource/<string:Rname>')
 def postAnnouncement(Rname):
-    return AnnouncementHandler().getAnnouncementByResourceName(Rname)
+    return AnnouncementHandler().getAnnouncementByResource(Rname)
 
 @app.route('/ResourceLocator/Announcements/' , methods=['GET', 'POST'])
 def getAllAnnouncements():

@@ -110,7 +110,7 @@ class AnnouncementHandler:
         announcement_list = dao.getAnnouncementByResource(Rname)
         result_list = []
         for row in announcement_list:
-            result = self.build_resource_dict(row)
+            result = self.build_announcement_dict(row)
             result_list.append(result)
         return jsonify(Announcements=result_list)
 
